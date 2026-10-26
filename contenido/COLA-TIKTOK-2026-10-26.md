@@ -1,4 +1,4 @@
-# Cola de publicaciones orgánicas (TikTok / Metricool)
+# Cola de publicaciones orgánicas (TikTok Studio / Meta Business Suite)
 
 Regla nueva, sacada del comentario «¿Y qué es, para qué sirve? Mucha propaganda pero hay que rebuscar»:
 **la primera línea de cada texto, y el texto en pantalla de cada vídeo, dicen qué es: «Masajeador de cuello GlowPulse».**
@@ -13,7 +13,7 @@ Solo datos de la ficha de Shopify. Nada de salud, nada facial y la garantía no 
 | 5 | Blanco en mesita | Shopify `gp-ia-I1-blanco-mesita.png` | Masajeador de cuello GlowPulse en blanco 🌙 También en rosa y plata negra. 59,95 € con envío gratis a península y Baleares. glowpulse.store #GlowPulse #masajeadordecuello |
 
 Ritmo: 2 al día (13:00 y 20:30, hora de Madrid) hasta que el equipo de investigación entregue el plan viral.
-Estado: TikTok aún no está conectado en Metricool (blogId 7055270). Se programa en cuanto aparezca.
+Estado: Metricool descartado (plan gratis bloqueado, >20 publicaciones/mes). TikTok se programa desde TikTok Studio web (gratis, hasta 10 días vista); IG/FB desde Meta Business Suite. Encargado al director el 26-10. Descargar el clip de Runway antes del 28-10.
 
 ## Respuesta al comentario «¿Y qué es, para qué sirve?»
 ¡Gracias por preguntar y tienes toda la razón! 😊 Es GlowPulse, un masajeador de cuello para tu rato de cuidado en casa. Tiene calor, EMS con niveles y luz LED, y es inalámbrico y recargable por USB. Cuesta 59,95 € con envío gratis a península y Baleares, y tienes 14 días para devolverlo. Todos los detalles en glowpulse.store
