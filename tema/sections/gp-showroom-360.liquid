@@ -54,33 +54,31 @@
     var vid = root.querySelector('video'), buy = root.querySelector('[data-gp360-buy]');
     function done() { root.classList.add('is-done'); buy.classList.add('is-on'); }
     if (!vid || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { done(); return; }
-    var dur = 0, ticking = false;
-    vid.addEventListener('loadedmetadata', function () { dur = vid.duration || 0; });
-    vid.addEventListener('ended', done);
+    // El vídeo tiene todos los fotogramas como clave: se puede mover al punto exacto del scroll sin saltos
+    var dur = 0, cur = 0, target = 0;
     function progress() {
       var r = root.getBoundingClientRect(), total = root.offsetHeight - window.innerHeight;
       return total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 1;
     }
-    function step() {
-      ticking = false;
-      if (!dur) return;
-      var p = progress(), target = p * dur, lag = target - vid.currentTime;
-      if (p >= 0.985) { if (vid.currentTime < dur - 0.05) { vid.playbackRate = 2; vid.play(); } else { done(); } return; }
-      if (lag > 0.08) {
-        // Va por detrás del scroll: se reproduce (fluido), más rápido cuanto más lejos esté
-        vid.playbackRate = Math.min(2.5, Math.max(0.6, lag * 3));
-        if (vid.paused) vid.play();
-        requestAnimationFrame(function () { if (!ticking) { ticking = true; step(); } });
-      } else if (lag < -0.6) {
-        // Ha subido mucho: se recoloca hacia atrás
-        vid.pause(); vid.currentTime = target;
-      } else {
-        vid.pause();
-      }
+    function onScroll() {
+      var p = progress();
+      target = p * dur;
+      if (p >= 0.97) done();
     }
-    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(step); } }, { passive: true });
-    // En iOS el vídeo no carga hasta que se toca; se pide la carga al entrar
-    vid.load();
+    function frame() {
+      requestAnimationFrame(frame);
+      if (!dur) return;
+      var d = target - cur;
+      if (Math.abs(d) < 0.01) return;
+      cur += d * 0.25;
+      if (!vid.seeking) vid.currentTime = Math.min(cur, dur - 0.01);
+    }
+    vid.addEventListener('loadedmetadata', function () { dur = vid.duration || 0; onScroll(); });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // iOS solo pinta fotogramas de un vídeo que ya se ha reproducido una vez
+    var pr = vid.play(); if (pr && pr.then) pr.then(function () { vid.pause(); vid.currentTime = 0; }).catch(function () {});
+    if (vid.readyState >= 1) { dur = vid.duration || 0; onScroll(); }
+    frame();
   })();
 </script>
 

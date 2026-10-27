@@ -23,6 +23,12 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 7. Pop-up BIENVENIDA10 + Shopify Email (bienvenida, carrito abandonado, 48 h).
 8. CJ: ticket en la web pidiendo envío UE por país si Kelly no contesta.
 
+## LO PRIMERO en la próxima sesión (antes del 29-10 08:00)
+1. Duplicar el tema publicado v13 (208019882318) → «GlowPulse v14 – 360 fijo».
+2. En el v14: subir sections/gp-showroom-360.liquid del repo (giro exacto) y en templates/product.json cambiar video_url por la URL de cdn.shopify.com de arriba.
+3. Probarlo en Chromium móvil (playwright, 390×844) con el mp4 local: que gire con el scroll y salga el botón al final.
+4. Pasar a Antonio la vista previa del v14 para publicar. Si no se publica antes del 29-10, la portada se queda en la imagen fija.
+
 ## Registro (lo más nuevo abajo)
 | Fecha | Qué | IDs / archivo | Resultado |
 |---|---|---|---|
@@ -46,3 +52,4 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 | 27-10 tarde | **Error detectado**: el producto real es de mano en T, no rodea el cuello. C3 decía «te lo colocas alrededor del cuello» → **C3 en pausa**; nuevo **C4_paraquesirve_v2_img** (52561441043099, «lo coges con una mano, lo deslizas por el cuello») ACTIVO. Corregidas las reglas de COLA y VIRAL. Vídeo viral 1 descartado (aparato en U) | anuncios 52561383722299 / 52561441043099 | Hecho |
 | 27-10 noche | Antonio: «no lo hagas con vídeo de Runway, hazlo por código». **Portada 360 rehecha por código** (Three.js r128 desde cdnjs): modelo 3D del aparato en T dentro de una sala verde agua (#A8DDD0), gira 360° con el scroll, botón «Comprar · 59,95 €» al terminar la vuelta. Probado en Chromium a 390×844 sin errores (tema/prueba-360-movil.png). Subido al **tema v13** (208019882318) | sections/gp-showroom-360.liquid | Falta: Antonio lo mira y publica el v13. Codex lo revisa cuando vuelva el PC. El vídeo de Runway ya no se usa |
 | 27-10 noche | Antonio: el 3D por código «no parece el producto real». Elige la opción **vídeo de vuelta ya hecho** (Runway 3e01ee0d, generado desde la foto real). v13 vuelve a la sección de vídeo sincronizado con el scroll, conectada al **enlace temporal de Runway (caduca el 29-10 ~08:00)**. La versión 3D queda guardada en tema/sections/gp-showroom-360-3d.liquid | tema v13 | Falta: Antonio sube el vídeo a Shopify (Contenido → Archivos, «gp360-vuelta.mp4») o permite dnznrvs05pmza.cloudfront.net → entonces cambiar a ajuste «video» de Shopify y quitar video_url. Luego publicar v13 |
+| 27-10 noche | Antonio permitió el dominio de Runway. Vuelta 360 revisada fotograma a fotograma: OK (360° completos, mismo aparato en T, 24 fps). Recodificada todo-clave 540×960 (0,9 MB, tema/media/gp360-vuelta.mp4) y subida a Shopify como archivo sin recomprimir: **https://cdn.shopify.com/s/files/1/1081/7250/9518/files/gp360-vuelta.mp4?v=1793118033** (GenericFile 74892381094222). Código nuevo de la sección (giro exacto con el scroll, también hacia atrás) en tema/sections/gp-showroom-360.liquid, **sin probar aún en navegador** | — | **Antonio ya publicó el v13**, que sigue usando el enlace temporal de Runway (caduca el 29-10 ~08:00) |
