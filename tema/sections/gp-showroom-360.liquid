@@ -3,11 +3,14 @@
   Al bajar, el producto da la vuelta de 360° con el scroll (también hacia atrás). Cuando termina aparece el botón de comprar.
   v14: ya no usa <video> (en el móvil, sobre todo iPhone y modo ahorro, el vídeo no se movía con el scroll).
   Ahora son fotogramas sueltos (Contenido > Archivos: gp360-f01.webp … gp360-f60.webp) pintados en un canvas: va en cualquier móvil.
+  v15: el código va en assets/gp-showroom-360.js como componente <gp-showroom-360> (también se carga en layout/theme.liquid),
+  porque Horizon no ejecuta <script> en línea al cambiar de página sin recargar.
 {%- endcomment -%}
 {%- assign n = section.settings.frames | default: 60 -%}
 {%- assign prefix = section.settings.frames_prefix | default: 'gp360-f' -%}
 {%- capture first_name -%}{{ prefix }}01.webp{%- endcapture -%}
-<section class="gp360" id="gp360-{{ section.id }}" data-gp360>
+<gp-showroom-360 class="gp360" id="gp360-{{ section.id }}">
+  <script type="application/json" data-gp360-urls>[{%- for i in (1..n) -%}{%- capture f -%}{{ prefix }}{% if i < 10 %}0{% endif %}{{ i }}.webp{%- endcapture -%}{{ f | file_url | json }}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]</script>
   <div class="gp360__stick" data-gp360-stick>
     <canvas class="gp360__vid" width="540" height="960" role="img" aria-label="{{ section.settings.title | escape }} visto por todos lados"
       style="background: center / contain no-repeat url('{{ first_name | file_url }}')"></canvas>
@@ -21,10 +24,10 @@
       <span class="gp360__sub">{{ section.settings.buy_sub }}</span>
     </div>
   </div>
-</section>
+</gp-showroom-360>
 
 <style>
-  #gp360-{{ section.id }} { --gp-bg1: {{ section.settings.wall }}; --gp-bg2: {{ section.settings.floor }}; height: {{ section.settings.scroll_vh }}vh; position: relative; background: linear-gradient(180deg, var(--gp-bg1) 0%, var(--gp-bg1) 50%, var(--gp-bg2) 78%, var(--gp-bg2) 100%); }
+  #gp360-{{ section.id }} { --gp-bg1: {{ section.settings.wall }}; --gp-bg2: {{ section.settings.floor }}; height: {{ section.settings.scroll_vh }}vh; display: block; position: relative; background: linear-gradient(180deg, var(--gp-bg1) 0%, var(--gp-bg1) 50%, var(--gp-bg2) 78%, var(--gp-bg2) 100%); }
   #gp360-{{ section.id }} .gp360__stick { position: -webkit-sticky; position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
   #gp360-{{ section.id }}.is-jsstick .gp360__stick { position: absolute; left: 0; right: 0; will-change: transform; }
   #gp360-{{ section.id }} .gp360__vid { position: absolute; left: 50%; bottom: {{ section.settings.lift }}vh; bottom: {{ section.settings.lift }}svh; transform: translateX(-50%); height: {{ section.settings.size }}vh; height: {{ section.settings.size }}svh; width: auto; max-width: none; aspect-ratio: 9 / 16; -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 58%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 58%, transparent 100%); }
@@ -40,51 +43,7 @@
   @media (prefers-reduced-motion: reduce) { #gp360-{{ section.id }} { height: auto; } #gp360-{{ section.id }} .gp360__stick { position: relative; } #gp360-{{ section.id }} .gp360__buy { opacity: 1; transform: none; pointer-events: auto; } }
 </style>
 
-<script>
-  (function () {
-    var root = document.getElementById('gp360-{{ section.id }}');
-    if (!root) return;
-    var urls = [{%- for i in (1..n) -%}{%- capture f -%}{{ prefix }}{% if i < 10 %}0{% endif %}{{ i }}.webp{%- endcapture -%}{{ f | file_url | json }}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}];
-    var cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), stick = root.querySelector('[data-gp360-stick]'), buy = root.querySelector('[data-gp360-buy]');
-    var N = urls.length, imgs = new Array(N), ok = new Array(N), shown = -1, cur = 0, jsStick = false;
-    function done() { root.classList.add('is-done'); buy.classList.add('is-on'); }
-    function draw(i) {
-      // Si ese fotograma aún no ha llegado, se pinta el cargado más cercano
-      for (var d = 0; d < N; d++) {
-        var j = ok[(i + d) % N] ? (i + d) % N : ok[(i - d + N) % N] ? (i - d + N) % N : -1;
-        if (j >= 0) { if (j !== shown) { ctx.drawImage(imgs[j], 0, 0, cv.width, cv.height); shown = j; } return; }
-      }
-    }
-    function load(i) {
-      if (imgs[i]) return;
-      var im = new Image();
-      im.decoding = 'async';
-      im.onload = function () { ok[i] = true; if (shown < 0 || i === Math.round(cur) % N) { shown = -2; draw(Math.round(cur) % N); } };
-      im.src = urls[i];
-      imgs[i] = im;
-    }
-    // Primero 1 de cada 8 (la vuelta se ve enseguida), luego se rellenan los huecos
-    [8, 4, 2, 1].forEach(function (s) { for (var i = 0; i < N; i += s) load(i); });
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { done(); return; }
-
-    function tick() {
-      requestAnimationFrame(tick);
-      var r = root.getBoundingClientRect(), vh = window.innerHeight, total = root.offsetHeight - vh;
-      if (r.bottom < -50 || r.top > vh + 50) return;
-      var y = Math.min(Math.max(-r.top, 0), Math.max(total, 0));
-      // Si algún contenedor del tema impide el sticky, la sala se fija por código
-      if (!jsStick && y > 20 && stick.getBoundingClientRect().top < -10) { jsStick = true; root.classList.add('is-jsstick'); }
-      if (jsStick) stick.style.transform = 'translate3d(0,' + y + 'px,0)';
-      var p = total > 0 ? y / total : 1;
-      if (p >= 0.97) done();
-      var target = p * (N - 1);
-      cur += (target - cur) * 0.3;
-      if (Math.abs(target - cur) < 0.05) cur = target;
-      draw(Math.round(cur) % N);
-    }
-    requestAnimationFrame(tick);
-  })();
-</script>
+<script src="{{ 'gp-showroom-360.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
