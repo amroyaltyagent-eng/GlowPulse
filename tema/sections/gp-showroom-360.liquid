@@ -1,21 +1,30 @@
 {%- comment -%}
-  GlowPulse · portada de la ficha (27-10, v2 por código): el masajeador en un expositor de una sala verde agua.
-  Modelo 3D dibujado con Three.js (sin vídeo). Al bajar, el aparato da una vuelta de 360° con el scroll;
-  al terminar la vuelta aparece el botón de comprar y después sigue la ficha tal como está.
-  Forma real: aparato de mano en T (cabezal plateado curvo con luz rosa, cuello, cuerpo ovalado blanco con panel y botón).
+  GlowPulse · portada de la ficha (27-10): el producto en un expositor de una sala verde agua.
+  Al bajar, el vídeo de la vuelta de 360° avanza con el scroll (se reproduce, no salta de fotograma en fotograma).
+  Cuando termina la vuelta aparece el botón de comprar; después sigue la ficha tal como está.
 {%- endcomment -%}
-<section class="gp360" id="gp360-{{ section.id }}">
+{%- assign v = section.settings.video -%}
+<section class="gp360" id="gp360-{{ section.id }}" data-gp360>
   <div class="gp360__stick">
-    <canvas class="gp360__cv" aria-label="Masajeador de cuello GlowPulse girando en un expositor"></canvas>
-    {%- if section.settings.poster != blank -%}
-      {{ section.settings.poster | image_url: width: 1080 | image_tag: class: 'gp360__fb', alt: section.settings.title, loading: 'eager' }}
+    {%- if v != blank -%}
+      <video class="gp360__vid" muted playsinline preload="auto" disablepictureinpicture
+        {% if section.settings.poster != blank %}poster="{{ section.settings.poster | image_url: width: 1080 }}"{% endif %}>
+        {%- for s in v.sources -%}
+          {%- if s.format == 'mp4' -%}<source src="{{ s.url }}" type="{{ s.mime_type }}">{%- endif -%}
+        {%- endfor -%}
+      </video>
+    {%- elsif section.settings.video_url != blank -%}
+      <video class="gp360__vid" muted playsinline preload="auto" disablepictureinpicture src="{{ section.settings.video_url }}"
+        {% if section.settings.poster != blank %}poster="{{ section.settings.poster | image_url: width: 1080 }}"{% endif %}></video>
+    {%- elsif section.settings.poster != blank -%}
+      {{ section.settings.poster | image_url: width: 1080 | image_tag: class: 'gp360__vid', alt: section.settings.title }}
     {%- endif -%}
     <div class="gp360__txt">
       <h2 class="gp360__h">{{ section.settings.title }}</h2>
       <p class="gp360__p">{{ section.settings.subtitle }}</p>
     </div>
-    <div class="gp360__hint" aria-hidden="true">Desliza para verlo por todos lados ↓</div>
-    <div class="gp360__buy">
+    <div class="gp360__hint" data-gp360-hint aria-hidden="true">Desliza para verlo por todos lados ↓</div>
+    <div class="gp360__buy" data-gp360-buy>
       <a class="gp360__btn" href="{{ section.settings.buy_link | default: '#gp4-choose' }}">{{ section.settings.buy_text }}</a>
       <span class="gp360__sub">{{ section.settings.buy_sub }}</span>
     </div>
@@ -23,159 +32,55 @@
 </section>
 
 <style>
-  #gp360-{{ section.id }} { height: {{ section.settings.scroll_vh }}vh; position: relative; background: {{ section.settings.wall }}; }
+  #gp360-{{ section.id }} { --gp-bg1: {{ section.settings.wall }}; --gp-bg2: {{ section.settings.floor }}; height: {{ section.settings.scroll_vh }}vh; position: relative; background: linear-gradient(180deg, var(--gp-bg1) 0%, var(--gp-bg1) 50%, var(--gp-bg2) 78%, var(--gp-bg2) 100%); }
   #gp360-{{ section.id }} .gp360__stick { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
-  #gp360-{{ section.id }} .gp360__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-  #gp360-{{ section.id }} .gp360__fb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
-  #gp360-{{ section.id }}.no-3d .gp360__fb { display: block; }
-  #gp360-{{ section.id }} .gp360__txt { position: absolute; top: 8svh; left: 0; right: 0; padding: 0 20px; text-align: center; z-index: 2; }
+  #gp360-{{ section.id }} .gp360__vid { position: absolute; left: 50%; bottom: {{ section.settings.lift }}svh; transform: translateX(-50%); height: {{ section.settings.size }}svh; width: auto; max-width: none; object-fit: contain; -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 58%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 58%, transparent 100%); }
+  #gp360-{{ section.id }} .gp360__txt { position: absolute; top: 9svh; left: 0; right: 0; padding: 0 20px; text-align: center; z-index: 2; }
   #gp360-{{ section.id }} .gp360__h { margin: 0 0 8px; font-size: clamp(26px, 7vw, 46px); line-height: 1.08; color: #10322b; letter-spacing: -.01em; }
   #gp360-{{ section.id }} .gp360__p { margin: 0 auto; max-width: 30em; font-size: clamp(15px, 4vw, 19px); color: #1d4a40; }
-  #gp360-{{ section.id }} .gp360__hint { position: relative; z-index: 2; margin-bottom: 5svh; font-size: 14px; color: #10322b; opacity: .85; transition: opacity .4s; }
-  #gp360-{{ section.id }} .gp360__buy { position: absolute; left: 0; right: 0; bottom: 6svh; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity .5s, transform .5s; }
-  #gp360-{{ section.id }}.is-done .gp360__buy { opacity: 1; transform: none; pointer-events: auto; }
-  #gp360-{{ section.id }}.is-done .gp360__hint { opacity: 0; }
+  #gp360-{{ section.id }} .gp360__hint { position: relative; z-index: 2; margin-bottom: 6svh; font-size: 14px; color: #10322b; opacity: .85; transition: opacity .4s; }
+  #gp360-{{ section.id }} .gp360__buy { position: absolute; left: 0; right: 0; bottom: 7svh; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity .5s, transform .5s; }
+  #gp360-{{ section.id }} .gp360__buy.is-on { opacity: 1; transform: none; pointer-events: auto; }
   #gp360-{{ section.id }} .gp360__btn { display: inline-block; padding: 16px 34px; border-radius: 999px; background: #10322b; color: #fff; font-weight: 700; font-size: 17px; text-decoration: none; box-shadow: 0 10px 30px rgba(16,50,43,.28); }
   #gp360-{{ section.id }} .gp360__sub { font-size: 14px; color: #10322b; background: rgba(255,255,255,.7); padding: 4px 12px; border-radius: 999px; }
-  @media (prefers-reduced-motion: reduce) { #gp360-{{ section.id }} { height: auto; } #gp360-{{ section.id }} .gp360__stick { position: relative; } }
+  #gp360-{{ section.id }}.is-done .gp360__hint { opacity: 0; }
+  @media (prefers-reduced-motion: reduce) { #gp360-{{ section.id }} { height: auto; } #gp360-{{ section.id }} .gp360__stick { position: relative; } #gp360-{{ section.id }} .gp360__buy { opacity: 1; transform: none; pointer-events: auto; } }
 </style>
 
 <script>
   (function () {
     var root = document.getElementById('gp360-{{ section.id }}');
     if (!root) return;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var WALL = '{{ section.settings.wall }}', FLOOR = '{{ section.settings.floor }}', BODY = '{{ section.settings.body_color }}';
-    var DIST = {{ section.settings.dist | default: 16 }};
-    function fallback() { root.classList.add('no-3d', 'is-done'); }
-    function done() { root.classList.add('is-done'); }
-
-    function init() {
-      var T = window.THREE;
-      if (!T) { fallback(); return; }
-      var cv = root.querySelector('canvas'), stick = root.querySelector('.gp360__stick');
-      var R;
-      try { R = new T.WebGLRenderer({ canvas: cv, antialias: true }); } catch (e) { fallback(); return; }
-      R.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-      R.outputEncoding = T.sRGBEncoding;
-      R.toneMapping = T.ACESFilmicToneMapping;
-      R.toneMappingExposure = 0.9;
-      R.shadowMap.enabled = true;
-      R.shadowMap.type = T.PCFSoftShadowMap;
-
-      // Los colores se dan en sRGB; Three.js trabaja en lineal
-      function C(h) { return new T.Color(h).convertSRGBToLinear(); }
-      var S = new T.Scene();
-      S.background = C(WALL);
-
-      // Reflejos suaves para el plateado: entorno pintado en un canvas (cielo claro, suelo verde agua)
-      var ec = document.createElement('canvas'); ec.width = 512; ec.height = 256;
-      var g = ec.getContext('2d'), gr = g.createLinearGradient(0, 0, 0, 256);
-      gr.addColorStop(0, '#ffffff'); gr.addColorStop(0.45, '#f2fbf8'); gr.addColorStop(0.55, WALL); gr.addColorStop(1, FLOOR);
-      g.fillStyle = gr; g.fillRect(0, 0, 512, 256);
-      g.fillStyle = 'rgba(255,255,255,.95)'; g.fillRect(70, 30, 110, 40); g.fillRect(330, 40, 90, 30);
-      var et = new T.CanvasTexture(ec); et.mapping = T.EquirectangularReflectionMapping; et.encoding = T.sRGBEncoding;
-      var pm = new T.PMREMGenerator(R);
-      S.environment = pm.fromEquirectangular(et).texture;
-
-      // Sala: suelo y pared
-      var floor = new T.Mesh(new T.PlaneGeometry(60, 60), new T.MeshStandardMaterial({ color: C(FLOOR), roughness: 0.95 }));
-      floor.rotation.x = -Math.PI / 2; floor.position.y = -1.6; floor.receiveShadow = true; S.add(floor);
-      var wall = new T.Mesh(new T.PlaneGeometry(60, 30), new T.MeshStandardMaterial({ color: C(WALL), roughness: 1 }));
-      wall.position.set(0, 8, -7); S.add(wall);
-
-      // Expositor
-      var white = new T.MeshStandardMaterial({ color: C('#f4f6f4'), roughness: 0.85 });
-      var ped = new T.Mesh(new T.CylinderGeometry(1.25, 1.25, 1.6, 64), white);
-      ped.position.y = -0.8; ped.castShadow = true; ped.receiveShadow = true; S.add(ped);
-      var plate = new T.Mesh(new T.CylinderGeometry(1.0, 1.0, 0.06, 64), new T.MeshStandardMaterial({ color: C('#d3eee6'), roughness: 0.5 }));
-      plate.position.y = 0.03; plate.receiveShadow = true; S.add(plate);
-
-      // Masajeador (aparato de mano en T)
-      var shell = new T.MeshPhysicalMaterial({ color: C(BODY), roughness: 0.22, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.08 });
-      var chrome = new T.MeshStandardMaterial({ color: C('#e9ecef'), metalness: 1, roughness: 0.14 });
-      var led = new T.MeshStandardMaterial({ color: C('#ff8adf'), emissive: C('#ff4fc8'), emissiveIntensity: 1.4, roughness: 0.3 });
-      var dot = new T.MeshStandardMaterial({ color: C('#ffb547'), emissive: C('#ff9d1a'), emissiveIntensity: 0.9 });
-      var P = new T.Group();
-      var body = new T.Mesh(new T.SphereGeometry(1, 64, 48), shell);
-      body.scale.set(0.62, 1.0, 0.25); body.castShadow = true; P.add(body);
-      var rim = new T.Mesh(new T.TorusGeometry(1, 0.035, 12, 96), chrome);
-      rim.scale.set(0.62, 1.0, 1); rim.position.z = -0.03; P.add(rim);
-      var joint = new T.Mesh(new T.SphereGeometry(0.2, 32, 24), chrome);
-      joint.position.set(0.06, 1.02, 0); joint.scale.set(1, 0.85, 1); joint.castShadow = true; P.add(joint);
-      var neck = new T.Mesh(new T.CylinderGeometry(0.12, 0.17, 0.62, 32), shell);
-      neck.position.set(0.03, 1.38, 0); neck.castShadow = true; P.add(neck);
-      var arc = new T.QuadraticBezierCurve3(new T.Vector3(-0.9, 1.98, 0), new T.Vector3(0, 1.58, 0), new T.Vector3(0.9, 1.98, 0));
-      var head = new T.Mesh(new T.TubeGeometry(arc, 80, 0.15, 28, false), chrome);
-      head.scale.z = 0.75; head.castShadow = true; P.add(head);
-      [arc.getPoint(0), arc.getPoint(1)].forEach(function (p) {
-        var cap = new T.Mesh(new T.SphereGeometry(0.15, 28, 20), chrome);
-        cap.position.copy(p); cap.scale.z = 0.75; P.add(cap);
-      });
-      var arcL = new T.QuadraticBezierCurve3(new T.Vector3(-0.66, 1.93, 0.1), new T.Vector3(0, 1.63, 0.1), new T.Vector3(0.66, 1.93, 0.1));
-      P.add(new T.Mesh(new T.TubeGeometry(arcL, 60, 0.045, 12, false), led));
-      var btn = new T.Mesh(new T.CylinderGeometry(0.13, 0.13, 0.04, 40), new T.MeshStandardMaterial({ color: C('#f0f2f3'), metalness: 0.3, roughness: 0.3 }));
-      btn.rotation.x = Math.PI / 2; btn.position.set(0, -0.42, 0.25); P.add(btn);
-      var ring = new T.Mesh(new T.TorusGeometry(0.13, 0.012, 8, 40), chrome);
-      ring.position.set(0, -0.42, 0.272); P.add(ring);
-      for (var i = 0; i < 5; i++) {
-        var d = new T.Mesh(new T.SphereGeometry(0.022, 10, 8), dot);
-        d.position.set(0.12, 0.42 - i * 0.12, 0.245); P.add(d);
-      }
-      P.position.y = 1.08; P.rotation.z = -0.06;
-      S.add(P);
-
-      // Luces
-      S.add(new T.HemisphereLight(0xffffff, C(FLOOR), 0.5));
-      var key = new T.DirectionalLight('#ffffff', 1.25);
-      key.position.set(3, 9, 6); key.castShadow = true;
-      key.shadow.mapSize.set(1024, 1024); key.shadow.radius = 6;
-      var sc = key.shadow.camera; sc.left = -4; sc.right = 4; sc.top = 6; sc.bottom = -3; sc.near = 1; sc.far = 25;
-      S.add(key);
-      var fill = new T.DirectionalLight('#ffffff', 0.45); fill.position.set(-5, 3, 4); S.add(fill);
-
-      var cam = new T.PerspectiveCamera(30, 1, 0.1, 100);
-      var cur = 0, target = 0, dirty = true, visible = true;
-      function size() {
-        var w = stick.clientWidth, h = stick.clientHeight;
-        R.setSize(w, h, false); cam.aspect = w / h;
-        // En móvil (vertical) se aleja un poco más para que quepa entero
-        var dd = DIST * (cam.aspect < 0.8 ? 1.4 : 1);
-        cam.position.set(0, 2.6, dd); cam.lookAt(0, 1.3, 0);
-        cam.updateProjectionMatrix(); dirty = true;
-      }
-      function progress() {
-        var r = root.getBoundingClientRect(), total = root.offsetHeight - window.innerHeight;
-        return total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 1;
-      }
-      function onScroll() {
-        if (reduce) return;
-        var p = progress();
-        target = p * Math.PI * 2;
-        if (p >= 0.97) done();
-      }
-      function frame() {
-        requestAnimationFrame(frame);
-        if (!visible) return;
-        var diff = target - cur;
-        if (Math.abs(diff) > 0.0005) { cur += diff * 0.12; dirty = true; }
-        if (!dirty) return;
-        P.rotation.y = cur;
-        R.render(S, cam); dirty = false;
-      }
-      window.addEventListener('resize', size);
-      window.addEventListener('scroll', onScroll, { passive: true });
-      if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(root);
-      size(); onScroll();
-      if (reduce) done();
-      frame();
+    var vid = root.querySelector('video'), buy = root.querySelector('[data-gp360-buy]');
+    function done() { root.classList.add('is-done'); buy.classList.add('is-on'); }
+    if (!vid || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { done(); return; }
+    var dur = 0, ticking = false;
+    vid.addEventListener('loadedmetadata', function () { dur = vid.duration || 0; });
+    vid.addEventListener('ended', done);
+    function progress() {
+      var r = root.getBoundingClientRect(), total = root.offsetHeight - window.innerHeight;
+      return total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 1;
     }
-
-    if (window.THREE) { init(); return; }
-    var s = document.createElement('script');
-    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-    s.onload = init; s.onerror = fallback;
-    document.head.appendChild(s);
+    function step() {
+      ticking = false;
+      if (!dur) return;
+      var p = progress(), target = p * dur, lag = target - vid.currentTime;
+      if (p >= 0.985) { if (vid.currentTime < dur - 0.05) { vid.playbackRate = 2; vid.play(); } else { done(); } return; }
+      if (lag > 0.08) {
+        // Va por detrás del scroll: se reproduce (fluido), más rápido cuanto más lejos esté
+        vid.playbackRate = Math.min(2.5, Math.max(0.6, lag * 3));
+        if (vid.paused) vid.play();
+        requestAnimationFrame(function () { if (!ticking) { ticking = true; step(); } });
+      } else if (lag < -0.6) {
+        // Ha subido mucho: se recoloca hacia atrás
+        vid.pause(); vid.currentTime = target;
+      } else {
+        vid.pause();
+      }
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(step); } }, { passive: true });
+    // En iOS el vídeo no carga hasta que se toca; se pide la carga al entrar
+    vid.load();
   })();
 </script>
 
@@ -183,16 +88,18 @@
 {
   "name": "GlowPulse 360 · expositor",
   "settings": [
-    { "type": "image_picker", "id": "poster", "label": "Imagen si el móvil no puede mostrar 3D" },
+    { "type": "video", "id": "video", "label": "Vídeo de la vuelta de 360° (vertical, 5-8 s)" },
+    { "type": "url", "id": "video_url", "label": "O enlace directo al vídeo (.mp4) si no está en Shopify" },
+    { "type": "image_picker", "id": "poster", "label": "Imagen fija (primer fotograma)" },
     { "type": "text", "id": "title", "label": "Título", "default": "Masajeador de cuello GlowPulse" },
     { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "Sirve para darte un masaje en el cuello en casa, en el sofá o en la cama, sin cables." },
     { "type": "text", "id": "buy_text", "label": "Botón", "default": "Comprar · 59,95 €" },
     { "type": "text", "id": "buy_sub", "label": "Texto bajo el botón", "default": "o 2 por 79,95 € · envío gratis" },
     { "type": "text", "id": "buy_link", "label": "Enlace del botón", "default": "#gp4-choose" },
-    { "type": "color", "id": "wall", "label": "Pared", "default": "#A8DDD0" },
-    { "type": "color", "id": "floor", "label": "Suelo", "default": "#8FCFC0" },
-    { "type": "color", "id": "body_color", "label": "Color del aparato", "default": "#FFFFFF" },
-    { "type": "range", "id": "dist", "label": "Distancia de la cámara (más = producto más lejos)", "min": 8, "max": 20, "step": 1, "default": 16 },
+    { "type": "color", "id": "wall", "label": "Pared", "default": "#BFE6DC" },
+    { "type": "color", "id": "floor", "label": "Suelo", "default": "#9FD3C5" },
+    { "type": "range", "id": "size", "label": "Tamaño del producto en pantalla (alto, % de la pantalla)", "min": 30, "max": 100, "step": 2, "default": 58 },
+    { "type": "range", "id": "lift", "label": "Altura desde abajo (%)", "min": 0, "max": 30, "step": 1, "default": 12 },
     { "type": "range", "id": "scroll_vh", "label": "Recorrido de scroll (vh)", "min": 150, "max": 400, "step": 10, "default": 260 }
   ],
   "presets": [{ "name": "GlowPulse 360 · expositor" }]
