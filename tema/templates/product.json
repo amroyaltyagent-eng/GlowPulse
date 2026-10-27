@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "gp360": {
+      "type": "gp-showroom-360",
+      "settings": {
+        "frames_prefix": "gp360-f",
+        "frames": 60,
+        "title": "Masajeador de cuello GlowPulse",
+        "subtitle": "Sirve para darte un masaje en el cuello en casa, en el sofá o en la cama, sin cables.",
+        "buy_text": "Comprar · 59,95 €",
+        "buy_sub": "o 2 por 79,95 € · envío gratis",
+        "buy_link": "#gp4-choose",
+        "wall": "#BFE6DC",
+        "floor": "#9FD3C5",
+        "size": 58,
+        "lift": 12,
+        "scroll_vh": 260
+      }
+    },
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {"type": "_product-media-gallery", "static": true, "settings": {"media_presentation": "grid", "media_columns": "two", "image_gap": 4, "aspect_ratio": "adapt", "constrain_to_viewport": true, "media_fit": "contain", "media_radius": 20, "zoom": true, "hide_variants": true}, "blocks": {}},
+        "product-details": {
+          "type": "_product-details", "static": true,
+          "settings": {"gap": 20, "sticky_details_desktop": true, "padding-block-start": 24, "padding-block-end": 24},
+          "blocks": {
+            "group_icgrde": {
+              "type": "group", "name": "t:names.header",
+              "settings": {"content_direction": "column", "gap": 12},
+              "blocks": {
+                "text_xrnftG": {"type": "text", "name": "t:names.product_title", "settings": {"text": "<h1>{{ closest.product.title }}</h1>", "type_preset": "h3"}, "blocks": {}},
+                "price_tVjtKg": {"type": "price", "settings": {"show_sale_price_first": true, "show_tax_info": false}, "blocks": {}}
+              },
+              "block_order": ["text_xrnftG", "price_tVjtKg"]
+            },
+            "gp4_top": {"type": "custom-liquid", "settings": {"custom_liquid": "{% render 'gp4-pdp', part: 'top', product: product %}"}, "blocks": {}},
+            "variant_picker_R3rGDr": {"type": "variant-picker", "settings": {"variant_style": "buttons", "show_swatches": false}, "blocks": {}},
+            "gp4_pack": {"type": "custom-liquid", "settings": {"custom_liquid": "{% render 'gp4-pdp', part: 'pack', product: product %}"}, "blocks": {}},
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons", "settings": {"stacking": true, "show_pickup_availability": false},
+              "blocks": {
+                "quantity": {"type": "quantity", "static": true, "settings": {}, "blocks": {}},
+                "add-to-cart": {"type": "add-to-cart", "static": true, "settings": {"style_class": "button"}, "blocks": {}},
+                "accelerated-checkout": {"type": "accelerated-checkout", "static": true, "settings": {}, "blocks": {}}
+              },
+              "block_order": []
+            },
+            "gp4_assure": {"type": "custom-liquid", "settings": {"custom_liquid": "{% render 'gp4-pdp', part: 'assure', product: product %}"}, "blocks": {}},
+            "gp4_acc": {"type": "custom-liquid", "settings": {"custom_liquid": "{% render 'gp4-pdp', part: 'acc', product: product %}"}, "blocks": {}}
+          },
+          "block_order": ["group_icgrde", "gp4_top", "variant_picker_R3rGDr", "gp4_pack", "buy_buttons_eYQEYi", "gp4_assure", "gp4_acc"]
+        }
+      },
+      "settings": {"content_width": "content-center-aligned", "desktop_media_position": "left", "gap": 48, "enable_sticky_add_to_cart": true}
+    },
+    "gp_story": {"type": "gp4-home", "settings": {"layout": "product"}}
+  },
+  "order": ["gp360", "main", "gp_story"]
+}
