@@ -14,7 +14,7 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 
 ## Pendiente solo PC (en orden)
 1. Píxel 1422829393132052: app Facebook & Instagram de Shopify en «Máximo» → que lleguen AddToCart y Purchase.
-2. Tema publicado v10 (207708193102), snippets/gp4-pdp.liquid: 89,95 → 79,95; 29,95 → 39,95; 44,98 → 39,98. También los metacampos gp4.i18n_* (v11).
+2. Ficha: el tema v11 ya está corregido para España → publicarlo (Antonio, 1 toque). Revisar antes la vista previa. Después, i18n_en/fr/de/it/pt_PT a 79,95 €.
 3. gp-comentarios: leer y contestar comentarios y DM de FB, IG, TikTok y anuncios de los últimos 14 días → marketing/FEEDBACK-COMENTARIOS.md.
 4. Equipo de investigación: 5 ganchos virales con nota → 2 por semana.
 5. Codex vía OmniRoute: revisión 1 de cada vídeo viral (ffprobe + fotogramas), 7 guiones a partir del feedback, 3 vídeos de anuncio de 15 s.
@@ -37,3 +37,5 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 | 27-10 | Intento viral 1 generado en Runway: mujer llega a casa y se lo pone en el sofá | tarea 2452b5fb-b8c2-4123-99db-83a9e4bcdae4 | Generado (15 s, 720×1280). **Sin aprobar**: la nube no puede descargarlo (red bloquea dnznrvs05pmza.cloudfront.net). 1.er fotograma: mujer realista, pero libro con texto inventado («TOALK…») y el aparato de la mesa no se ve en U → revisión completa en PC (Codex) o al permitir ese dominio |
 | 27-10 | Kelly (CJ) sin respuesta | hilo Gmail 1a17901e54c5ccc1 | Esperando |
 | 27-10 tarde | Métricas de hoy: C3_paraquesirve 2,45 €, 686 impresiones, 32 clics (CTR 4,7 %, 0,08 €/clic); C1_regalo79 0,46 €, 191 impr., 8 clics. Shopify: 14 sesiones, 0 carritos | — | C3 gana. El cuello de botella es la ficha/píxel, no el anuncio |
+| 27-10 tarde | Ficha: v10 no se puede editar (API bloquea el tema publicado) ni duplicar (tienda en el máximo de 20 temas). **Corregido el tema v11** (207922954574): snippet gp4-pdp «79,95 €» y metacampo gp4.i18n_es (89,95→79,95, 29,95→39,95, 44,98→39,98, verificado) | tema v11 | Listo para publicar → **Antonio** (vista previa: glowpulse.store/?preview_theme_id=207922954574). Pendiente: i18n_en/fr/de/it/pt_PT siguen en 89,95 (UE sin lanzar) |
+| 27-10 tarde | Píxel 1422829393132052: eventos sin código activos: ViewContent (URL /products/masajeador-cuello, 59,95 EUR) regla 1687670542780944; AddToCart (URL glowpulse.store/cart) regla 956274947202473. La regla por texto de botón «añadir al carrito» falla (la herramienta guarda mal la ñ) → borrada | reglas Meta | Activo. Solo se disparan con el consentimiento de cookies aceptado. Falta Purchase: app Facebook & Instagram de Shopify en «Máximo» (PC/Antonio) |
