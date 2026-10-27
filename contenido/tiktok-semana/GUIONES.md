@@ -1,7 +1,7 @@
 # Prueba TikTok · semana 27-10 a 2-11
 
 Objetivo: ver qué formato engancha (explicativo vs viral) antes de meter los 10 € de Promocionar.
-Reglas: primera línea y texto en pantalla dicen «Masajeador de cuello GlowPulse». Solo datos de la ficha (calor, EMS con niveles, luz LED, inalámbrico, recargable por USB, 59,95 €, pack 2 por 89,95 €, envío gratis a península y Baleares, 14 días para devolverlo, blanco/rosa/plata negra). Nada de dolor, cervicales, contracturas ni salud. Cuenta de empresa → solo sonidos de la Commercial Music Library («Sonidos comerciales» en TikTok Studio, filtrar por tendencia en España).
+Reglas: primera línea y texto en pantalla dicen «Masajeador de cuello GlowPulse». Solo datos de la ficha (calor, EMS con niveles, luz LED, inalámbrico, recargable por USB, 59,95 €, pack 2 por 79,95 €, envío gratis a península y Baleares, 14 días para devolverlo, blanco/rosa/plata negra). Nada de dolor, cervicales, contracturas ni salud. Cuenta de empresa → solo sonidos de la Commercial Music Library («Sonidos comerciales» en TikTok Studio, filtrar por tendencia en España).
 Presupuesto Runway: 3 €/día (≈300 créditos/día).
 
 ## Formatos de competencia en los que se basa (investigación 26-10)
@@ -50,8 +50,8 @@ Pendiente: el equipo de investigación del director confirma vistas y sonidos ex
 **B3 · POV: le regalas esto a tu madre** · I3 pack regalo + clip V1 (persona usándolo)
 - 0-2 s: «POV: este año aciertas con el regalo 🎁»
 - 2-10 s: pack de 2 en caja
-- 10-15 s: «Pack de 2 por 89,95 €: uno para ella, otro para ti»
-- Texto: Masajeador de cuello GlowPulse, el regalo que no tiene talla 🎁 Pack 2 por 89,95 € · glowpulse.store #regalosnavidad #ideasderegalo #regaloparamama
+- 10-15 s: «Pack de 2 por 79,95 €: uno para ella, otro para ti»
+- Texto: Masajeador de cuello GlowPulse, el regalo que no tiene talla 🎁 Pack 2 por 79,95 € · glowpulse.store #regalosnavidad #ideasderegalo #regaloparamama
 
 **B4 · «No puedes permitirte no tenerlo»** · carrusel 3 colores
 - «Masajeador de cuello GlowPulse» → «Blanco» → «Rosa» → «Plata negra» → «59,95 € con envío gratis»
