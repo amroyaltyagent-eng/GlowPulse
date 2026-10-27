@@ -18,6 +18,7 @@ Solo datos de la ficha de Shopify. Nada de salud, nada facial y la garantía no 
 | 7 | Pack 79,95 € para dos (27-10) | Shopify fotos blanco + rosa juntas | Masajeador de cuello GlowPulse para los dos 💛 Sirve para darte un masaje en el cuello en casa, sin cables. Pack de 2 por 79,95 € (39,98 € cada uno), elige los colores. Envío gratis y 14 días para devolverlo. glowpulse.store #regalosnavidad #ideasderegalo #packregalo |
 | 8 | Lista de Black Friday (27-10) | Shopify foto rosa | Masajeador de cuello GlowPulse 🖤 Sirve para darte un masaje en el cuello en casa, sin cables. Este Black Friday vamos a tener precio especial. Síguenos para no perdértelo. Hoy: 59,95 € o 2 por 79,95 € con envío gratis. glowpulse.store #blackfriday #masajeadordecuello |
 
+Vídeos: no usar ninguno de marketing/VIDEOS-VETADOS.md. El clip 1 (Runway) solo si se ve fluido en el móvil.
 Ojo: revisar que `gp-ia-I3-pack2-regalo.png` no lleve «89,95 €» escrito en la imagen antes de publicarla.
 
 Ritmo: 2 al día (13:00 y 20:30, hora de Madrid) hasta que el equipo de investigación entregue el plan viral.
