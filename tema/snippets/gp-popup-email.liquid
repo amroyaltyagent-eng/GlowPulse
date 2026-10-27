@@ -1,0 +1,80 @@
+{%- comment -%}
+  GlowPulse · captación de emails (27-10): «Lista VIP Black Friday» + 10 % hoy con BIENVENIDA10.
+  Crea el cliente en Shopify con consentimiento de marketing (casilla obligatoria, RGPD/LSSI) y las etiquetas newsletter y lista-black-friday.
+  Sale a los 15 s o al bajar media página; no sale en carrito ni pago; si se cierra, no vuelve en 7 días.
+{%- endcomment -%}
+{%- unless template.name == 'cart' or template.name contains 'customers' -%}
+<div class="gplead" id="gp-lead" hidden>
+  <div class="gplead__box" role="dialog" aria-modal="true" aria-labelledby="gp-lead-h">
+    <button type="button" class="gplead__x" data-gplead-close aria-label="Cerrar">×</button>
+    {%- form 'customer', id: 'gp-lead-form', class: 'gplead__form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="gplead__k">Ya estás en la lista</p>
+        <h2 class="gplead__h" id="gp-lead-h">Tu 10 %: <span class="gplead__code">BIENVENIDA10</span></h2>
+        <p class="gplead__p">Ponlo al pagar. Y antes del Black Friday te escribimos con el precio especial, antes que a nadie.</p>
+        <button type="button" class="gplead__btn" data-gplead-copy>Copiar código</button>
+        <script>window.__gpLeadOk = true;</script>
+      {%- else -%}
+        <p class="gplead__k">Lista VIP Black Friday</p>
+        <h2 class="gplead__h" id="gp-lead-h">10 % hoy y el precio de Black Friday antes que nadie</h2>
+        <p class="gplead__p">Déjanos tu email y te damos el código al momento.</p>
+        <input type="hidden" name="contact[tags]" value="newsletter,lista-black-friday,popup-web">
+        <label class="gplead__lbl" for="gp-lead-email">Tu email</label>
+        <input class="gplead__in" id="gp-lead-email" type="email" name="contact[email]" required autocomplete="email" placeholder="tu@email.com">
+        <label class="gplead__ok"><input type="checkbox" required> Acepto recibir emails de GlowPulse con ofertas. Me puedo dar de baja cuando quiera. <a href="/policies/privacy-policy" target="_blank">Privacidad</a></label>
+        {%- if form.errors -%}<p class="gplead__err">{{ form.errors | default_errors }}</p><script>window.__gpLeadOk = 'err';</script>{%- endif -%}
+        <button type="submit" class="gplead__btn">Quiero mi 10 %</button>
+        <button type="button" class="gplead__no" data-gplead-close>No, gracias</button>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</div>
+
+<style>
+  .gplead { position: fixed; inset: 0; z-index: 2147483000; display: flex; align-items: flex-end; justify-content: center; background: rgba(16,50,43,.45); }
+  .gplead[hidden] { display: none; }
+  .gplead__box { position: relative; width: 100%; max-width: 440px; margin: 0 auto; background: #fff; color: #10322b; border-radius: 22px 22px 0 0; padding: 28px 22px 22px; box-shadow: 0 -10px 40px rgba(0,0,0,.18); animation: gplead-in .35s ease-out; }
+  @media (min-width: 750px) { .gplead { align-items: center; } .gplead__box { border-radius: 22px; } }
+  @keyframes gplead-in { from { transform: translateY(40px); opacity: 0; } }
+  .gplead__x { position: absolute; top: 8px; right: 12px; border: 0; background: none; font-size: 28px; line-height: 1; color: #10322b; cursor: pointer; padding: 6px; }
+  .gplead__k { margin: 0 0 6px; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #2f7d6b; }
+  .gplead__h { margin: 0 0 8px; font-size: 22px; line-height: 1.15; }
+  .gplead__p { margin: 0 0 14px; font-size: 15px; color: #1d4a40; }
+  .gplead__lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .gplead__in { width: 100%; box-sizing: border-box; font-size: 16px; padding: 14px 16px; border: 1.5px solid #9FD3C5; border-radius: 12px; margin-bottom: 10px; }
+  .gplead__ok { display: block; font-size: 12.5px; line-height: 1.4; color: #1d4a40; margin-bottom: 14px; }
+  .gplead__ok a { color: inherit; }
+  .gplead__btn { width: 100%; border: 0; border-radius: 999px; padding: 15px; background: #10322b; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; }
+  .gplead__no { width: 100%; border: 0; background: none; color: #1d4a40; font-size: 13px; padding: 10px 0 0; cursor: pointer; text-decoration: underline; }
+  .gplead__code { white-space: nowrap; background: #BFE6DC; padding: 0 8px; border-radius: 8px; }
+  .gplead__err { color: #b00020; font-size: 13px; margin: 0 0 10px; }
+</style>
+
+<script>
+  (function () {
+    var box = document.getElementById('gp-lead');
+    if (!box) return;
+    var KEY = 'gpLeadSeen', now = Date.now();
+    function get() { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } }
+    function set(v) { try { localStorage.setItem(KEY, String(v)); } catch (e) {} }
+    function open() { if (!box.hidden) return; box.hidden = false; set(now); }
+    function close() { box.hidden = true; set(window.__gpLeadOk === true ? now + 3650 * 864e5 : now); }
+    box.addEventListener('click', function (e) {
+      if (e.target === box || e.target.closest('[data-gplead-close]')) close();
+      if (e.target.closest('[data-gplead-copy]')) {
+        try { navigator.clipboard.writeText('BIENVENIDA10'); e.target.textContent = 'Copiado ✓'; } catch (err) {}
+      }
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    // Tras enviar el formulario la página se recarga: se abre otra vez para mostrar el código o el error
+    if (window.__gpLeadOk) { box.hidden = false; set(window.__gpLeadOk === true ? now + 3650 * 864e5 : now); return; }
+    if (now - get() < 7 * 864e5) return;
+    var t = setTimeout(open, 15000);
+    function onScroll() {
+      var h = document.documentElement.scrollHeight - innerHeight;
+      if (h > 0 && (scrollY || document.documentElement.scrollTop) / h > 0.5) { clearTimeout(t); open(); removeEventListener('scroll', onScroll); }
+    }
+    addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>
+{%- endunless -%}
