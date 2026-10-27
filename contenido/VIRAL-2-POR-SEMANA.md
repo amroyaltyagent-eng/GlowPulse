@@ -28,4 +28,4 @@
 ## Registro
 | Fecha | Intento | Gancho | Tarea Runway | Revisión Codex | Revisión CEO | Publicado | 48 h |
 |---|---|---|---|---|---|---|---|
-| 27-10 | 1 | «Llegar a casa y ponérselo en el sofá» | 2452b5fb-b8c2-4123-99db-83a9e4bcdae4 | pendiente (PC desconectado) | pendiente | no | — |
+| 27-10 | 1 | «Llegar a casa y ponérselo en el sofá» | 2452b5fb-b8c2-4123-99db-83a9e4bcdae4 | pendiente (PC desconectado) | incompleta: no se puede descargar desde la nube; 1.er fotograma con texto inventado en un libro y producto dudoso | no | — |

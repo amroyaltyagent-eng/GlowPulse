@@ -34,5 +34,6 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 | 27-10 | C3_paraquesirve_img («¿Qué es? ¿Para qué sirve?…») | anuncio 52561383722299 | Activo |
 | 27-10 | Todos los anuncios de vídeo y el conjunto A_RITUAL en pausa (1 fps) | 52560796052099 y 6 anuncios | Hecho |
 | 27-10 | Cola orgánica a 79,95 € + 2.ª línea «para qué sirve» + 3 piezas nuevas (#6-8) | contenido/COLA-TIKTOK-2026-10-26.md | Hecho |
-| 27-10 | Intento viral 1 generado en Runway: mujer llega a casa y se lo pone en el sofá | tarea 2452b5fb-b8c2-4123-99db-83a9e4bcdae4 | En revisión |
+| 27-10 | Intento viral 1 generado en Runway: mujer llega a casa y se lo pone en el sofá | tarea 2452b5fb-b8c2-4123-99db-83a9e4bcdae4 | Generado (15 s, 720×1280). **Sin aprobar**: la nube no puede descargarlo (red bloquea dnznrvs05pmza.cloudfront.net). 1.er fotograma: mujer realista, pero libro con texto inventado («TOALK…») y el aparato de la mesa no se ve en U → revisión completa en PC (Codex) o al permitir ese dominio |
 | 27-10 | Kelly (CJ) sin respuesta | hilo Gmail 1a17901e54c5ccc1 | Esperando |
+| 27-10 tarde | Métricas de hoy: C3_paraquesirve 2,45 €, 686 impresiones, 32 clics (CTR 4,7 %, 0,08 €/clic); C1_regalo79 0,46 €, 191 impr., 8 clics. Shopify: 14 sesiones, 0 carritos | — | C3 gana. El cuello de botella es la ficha/píxel, no el anuncio |
