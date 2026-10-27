@@ -29,9 +29,9 @@
 </section>
 
 <style>
-  #gp360-{{ section.id }} { --gp-bg1: {{ section.settings.wall }}; --gp-bg2: {{ section.settings.floor }}; height: {{ section.settings.scroll_vh }}vh; position: relative; background: linear-gradient(180deg, var(--gp-bg1) 0%, var(--gp-bg1) 62%, var(--gp-bg2) 62%, var(--gp-bg2) 100%); }
+  #gp360-{{ section.id }} { --gp-bg1: {{ section.settings.wall }}; --gp-bg2: {{ section.settings.floor }}; height: {{ section.settings.scroll_vh }}vh; position: relative; background: linear-gradient(180deg, var(--gp-bg1) 0%, var(--gp-bg1) 50%, var(--gp-bg2) 78%, var(--gp-bg2) 100%); }
   #gp360-{{ section.id }} .gp360__stick { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
-  #gp360-{{ section.id }} .gp360__vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #gp360-{{ section.id }} .gp360__vid { position: absolute; left: 50%; bottom: {{ section.settings.lift }}svh; transform: translateX(-50%); height: {{ section.settings.size }}svh; width: auto; max-width: none; object-fit: contain; -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 58%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 58%, transparent 100%); }
   #gp360-{{ section.id }} .gp360__txt { position: absolute; top: 9svh; left: 0; right: 0; padding: 0 20px; text-align: center; z-index: 2; }
   #gp360-{{ section.id }} .gp360__h { margin: 0 0 8px; font-size: clamp(26px, 7vw, 46px); line-height: 1.08; color: #10322b; letter-spacing: -.01em; }
   #gp360-{{ section.id }} .gp360__p { margin: 0 auto; max-width: 30em; font-size: clamp(15px, 4vw, 19px); color: #1d4a40; }
@@ -94,6 +94,8 @@
     { "type": "text", "id": "buy_link", "label": "Enlace del botón", "default": "#gp4-choose" },
     { "type": "color", "id": "wall", "label": "Pared", "default": "#BFE6DC" },
     { "type": "color", "id": "floor", "label": "Suelo", "default": "#9FD3C5" },
+    { "type": "range", "id": "size", "label": "Tamaño del producto en pantalla (alto, % de la pantalla)", "min": 30, "max": 100, "step": 2, "default": 58 },
+    { "type": "range", "id": "lift", "label": "Altura desde abajo (%)", "min": 0, "max": 30, "step": 1, "default": 12 },
     { "type": "range", "id": "scroll_vh", "label": "Recorrido de scroll (vh)", "min": 150, "max": 400, "step": 10, "default": 260 }
   ],
   "presets": [{ "name": "GlowPulse 360 · expositor" }]

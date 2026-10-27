@@ -4,7 +4,7 @@ Regla nueva, sacada del comentario «¿Y qué es, para qué sirve? Mucha propaga
 **la primera línea de cada texto, y el texto en pantalla de cada vídeo, dicen qué es: «Masajeador de cuello GlowPulse».**
 **Regla 2 (27-10, Antonio): la segunda línea dice para qué sirve, siempre con la misma fórmula:**
 «Sirve para darte un masaje en el cuello en casa, en el sofá o en la cama, sin cables.»
-En vídeo: en los 3 primeros segundos se ve a alguien colocándoselo alrededor del cuello y el texto en pantalla «Masajeador de cuello · para darte un masaje en casa». Nada de cajas, pedestales o planos de producto solo sin enseñar cómo se usa.
+En vídeo: en los 3 primeros segundos se ve a alguien que lo coge con una mano y se lo desliza por el cuello (es un aparato de mano en forma de T, NO rodea el cuello) y el texto en pantalla «Masajeador de cuello · para darte un masaje en casa». Nada de cajas, pedestales o planos de producto solo sin enseñar cómo se usa.
 Solo datos de la ficha de Shopify. Nada de salud, nada facial y la garantía no se menciona hasta alinear los Términos §7.
 
 | # | Pieza | Archivo | Texto |
@@ -25,4 +25,4 @@ Ritmo: 2 al día (13:00 y 20:30, hora de Madrid) hasta que el equipo de investig
 Estado: Metricool descartado (plan gratis bloqueado, >20 publicaciones/mes). TikTok se programa desde TikTok Studio web (gratis, hasta 10 días vista); IG/FB desde Meta Business Suite. Encargado al director el 26-10. Descargar el clip de Runway antes del 28-10.
 
 ## Respuesta al comentario «¿Y qué es, para qué sirve?»
-¡Gracias por preguntar y tienes toda la razón! 😊 Es GlowPulse, un masajeador de cuello: sirve para darte un masaje en el cuello en casa, en el sofá o en la cama, sin cables. Te lo colocas alrededor del cuello y eliges el modo. Tiene calor, EMS con niveles y luz LED, y es inalámbrico y recargable por USB. Cuesta 59,95 € (o 2 por 79,95 €) con envío gratis a península y Baleares, y tienes 14 días para devolverlo. Todos los detalles en glowpulse.store
+¡Gracias por preguntar y tienes toda la razón! 😊 Es GlowPulse, un masajeador de cuello: sirve para darte un masaje en el cuello en casa, en el sofá o en la cama, sin cables. Lo coges con una mano, lo deslizas por el cuello y eliges el modo. Tiene calor, EMS con niveles y luz LED, y es inalámbrico y recargable por USB. Cuesta 59,95 € (o 2 por 79,95 €) con envío gratis a península y Baleares, y tienes 14 días para devolverlo. Todos los detalles en glowpulse.store

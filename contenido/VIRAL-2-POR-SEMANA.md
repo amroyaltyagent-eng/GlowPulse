@@ -10,11 +10,11 @@
 
 ## Formato
 - 15 s, 9:16, mínimo 24 fps reales, 1080×1920 o 720×1280. Nada de pases de fotos fijas (ver marketing/VIDEOS-VETADOS.md).
-- Segundos 0-3: alguien se pone el masajeador alrededor del cuello. Texto en pantalla: «Masajeador de cuello · para darte un masaje en casa».
+- Segundos 0-3: alguien coge el masajeador con una mano y se lo desliza por el cuello (aparato de mano en forma de T; NO rodea el cuello). Texto en pantalla: «Masajeador de cuello · para darte un masaje en casa».
 - 1.ª línea del texto: «Masajeador de cuello GlowPulse». 2.ª: «Sirve para darte un masaje en el cuello en casa, en el sofá o en la cama, sin cables».
 - Personajes con IA: sí, pero **nunca como cliente real ni testimonio** («lo compré y…»). Son escenas, no opiniones. Sin afirmaciones de salud, dolor, cervicales ni promesas faciales.
 - **Etiqueta de IA obligatoria**: en TikTok, «Contenido generado por IA» activado; en IG/FB, la etiqueta «Información de IA». Lo exigen las normas de TikTok y Meta y la ley europea de IA; sin etiqueta, la plataforma puede retirar el vídeo o bloquear la cuenta.
-- Producto idéntico al real (forma en U, botones, colores blanco/rosa/plata negra). Generar siempre con la foto de Shopify como referencia.
+- Producto idéntico al real (aparato de mano en forma de T con cabezal plateado y luz, cuerpo ovalado con panel de modos y botón, colores blanco/rosa/plata negra). Generar siempre con la foto de Shopify como referencia.
 
 ## Doble revisión antes de subir (las dos tienen que dar OK)
 1. **Codex (PC, vía OmniRoute)**: fps y duración con ffprobe, fotograma a fotograma cada 0,5 s: manos (5 dedos), cara estable, producto idéntico a la foto, nada que se deforme o aparezca/desaparezca, texto legible.
@@ -28,4 +28,4 @@
 ## Registro
 | Fecha | Intento | Gancho | Tarea Runway | Revisión Codex | Revisión CEO | Publicado | 48 h |
 |---|---|---|---|---|---|---|---|
-| 27-10 | 1 | «Llegar a casa y ponérselo en el sofá» | 2452b5fb-b8c2-4123-99db-83a9e4bcdae4 | pendiente (PC desconectado) | incompleta: no se puede descargar desde la nube; 1.er fotograma con texto inventado en un libro y producto dudoso | no | — |
+| 27-10 | 1 | «Llegar a casa y ponérselo en el sofá» · **DESCARTADO: el prompt describía un aparato en U que rodea el cuello; el real es de mano en T** | 2452b5fb-b8c2-4123-99db-83a9e4bcdae4 | pendiente (PC desconectado) | incompleta: no se puede descargar desde la nube; 1.er fotograma con texto inventado en un libro y producto dudoso | no | — |
