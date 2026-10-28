@@ -14,6 +14,8 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 - Meta: S2 (52560795965699) EN PAUSA. Activa GP_VENTAS_ATC_PODER_NOV26 (52561453789899), 12 €/día, solo anuncios de imagen.
 - Runway: tope 3 €/día. Un vídeo de 15 s cuesta unos 450 créditos (≈ 4,50 $): pendiente de que Antonio apruebe comprar créditos.
 
+- **GlowPulse HQ es secundario** (orden de Antonio, 28-10): no dedicarle tiempo. La información va a claude-mem (PC) y, en la nube, a este repo (MEMORIA-NUBE.md y ESTADO del día).
+
 ## Pendiente solo PC (en orden)
 1. Píxel 1422829393132052: app Facebook & Instagram de Shopify en «Máximo» → que lleguen AddToCart y Purchase.
 2. Ficha: el tema v11 ya está corregido para España → publicarlo (Antonio, 1 toque). Revisar antes la vista previa. Después, i18n_en/fr/de/it/pt_PT a 79,95 €.
