@@ -16,6 +16,11 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 
 - **Estilo de animación (Antonio, 28-10):** personajes **3D tipo película de animación** (como marketing/videos/animado-3d/K1_madre_hija_sofa_3d.png). El dibujo plano 2D NO le gusta: no usarlo en anuncios ni en orgánico.
 
+- **Forma de trabajo (Antonio, 28-10):** el CEO piensa y revisa; **Codex vía OmniRoute ejecuta** (vídeos, código, fichas, informes). Codex solo está en el PC; en la nube no hay Codex.
+- **Antonio aprueba TODA creatividad antes de publicarla** (vídeos e imágenes, en anuncios y orgánico). Nada se sube sin su OK.
+- **Letra:** la Inter no le gusta. Opciones en marketing/videos/animado-3d/LETRAS-opciones.jpg (A Poppins, B Nunito, C Montserrat, D DM Serif, E Fredoka) → que elija.
+- **Runway:** Antonio prefiere gastar en un vídeo 3D bueno (OK 28-10). La compra de créditos se hace en runway.com (la hace Antonio).
+
 - **GlowPulse HQ es secundario** (orden de Antonio, 28-10): no dedicarle tiempo. La información va a claude-mem (PC) y, en la nube, a este repo (MEMORIA-NUBE.md y ESTADO del día).
 
 ## Pendiente solo PC (en orden)
@@ -83,3 +88,5 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 | 28-10 tarde | **B_ES_iOS (52561457976099) EN PAUSA** (CTR 1 %, el peor); sus 4 €/día pasan a D_HIJAS. Meta sigue en 12 €/día: A 5 + C 3 + D 4 | — | Hecho. Presupuesto total sin cambios |
 | 28-10 tarde | Antonio: no le gusta el dibujo plano; quiere personajes 3D tipo película. **H1 y H2 (2D) en pausa.** Imagen 3D de prueba en Runway (tarea 36464bdf, aparato en T bien, revisada) → anuncio **H4_3d_madrehija_img** (52561672486099, creative 2159567827974379, imagen 74c7e68a…, etiqueta IA). Mientras, **H3_marmol_paratumadre** (52561671863699, foto mármol D1 con texto de hijas). Ambos en D_HIJAS | marketing/videos/animado-3d/ | En revisión de Meta. Runway: quedan 35 créditos |
 | 28-10 tarde | Vídeo 3D hija → madre: necesita ≈ 500 créditos de Runway (3 escenas de 5 s + 2 imágenes) → **pedido OK a Antonio para comprar 1.000 créditos (10 $)** | — | Esperando OK |
+| 28-10 tarde | Antonio: no le gusta la imagen 4:5 ni la letra → **H4_3d_madrehija_img (52561672486099) EN PAUSA**. En D_HIJAS solo queda activo H3_marmol_paratumadre | — | Hecho |
+| 28-10 tarde | Encargo de nuevos productos para la marca (lista corta y criterios) | marketing/investigacion/NUEVOS-PRODUCTOS-2026-10-28.md | En cola para Investigación (PC) |
