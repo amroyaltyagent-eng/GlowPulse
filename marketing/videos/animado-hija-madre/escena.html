@@ -1,0 +1,252 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:I;src:url(file:///usr/share/fonts/opentype/inter/Inter-Bold.otf);font-weight:700}
+@font-face{font-family:I;src:url(file:///usr/share/fonts/opentype/inter/Inter-Medium.otf);font-weight:500}
+@font-face{font-family:I;src:url(file:///usr/share/fonts/opentype/inter/Inter-ExtraBold.otf);font-weight:800}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#F7EFE6;font-family:I,sans-serif}
+#svg{position:absolute;left:0;top:0}
+#txt{position:absolute;left:0;top:0;width:1080px;height:1920px;pointer-events:none}
+.c{position:absolute;left:60px;right:60px;text-align:center;color:#2A2321}
+.c span{display:inline;background:rgba(255,255,255,.88);padding:6px 18px;border-radius:14px;line-height:1.5;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+</style></head>
+<body><svg id="svg" width="1080" height="1920" viewBox="0 0 1080 1920"></svg><div id="txt"></div>
+<script>
+// GlowPulse · animación 2D «hija regala a su madre». render(t) pinta el fotograma del segundo t (0-15).
+// El aparato es de mano en T: cabezal plateado con luz rosa arriba, cuerpo ovalado blanco abajo. Nunca en U.
+const SKIN='#F2C6A5', SKIN_D='#E3AE8A', INK='#2A2321';
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>{x=clamp(x);return x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2};
+const back=x=>{x=clamp(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const lerp=(a,b,k)=>a+(b-a)*k;
+const seg=(t,a,b)=>ease((t-a)/(b-a));
+
+function device(x,y,rot,s,glow){ // (x,y) = centro del cabezal
+  const g = glow>0 ? `<ellipse cx="0" cy="-2" rx="${70+glow*12}" ry="${26+glow*6}" fill="url(#gl)" opacity="${glow}"/>` : '';
+  return `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})">${g}
+   <path d="M-58 -6 Q-40 -20 0 -14 Q40 -20 58 -6 Q62 4 52 8 Q30 0 12 6 L10 40 L-10 40 L-12 6 Q-30 0 -52 8 Q-62 4 -58 -6Z" fill="url(#sil)" stroke="#9AA3AA" stroke-width="2"/>
+   <path d="M-44 -6 Q0 -16 44 -6" stroke="#FF8FCB" stroke-width="5" fill="none" stroke-linecap="round" opacity="${.55+.45*Math.max(glow,0)}"/>
+   <rect x="-12" y="34" width="24" height="12" rx="3" fill="#B9C1C7"/>
+   <ellipse cx="0" cy="98" rx="36" ry="58" fill="#FFFFFF" stroke="#C9CFD4" stroke-width="3"/>
+   <ellipse cx="-10" cy="84" rx="12" ry="30" fill="#F1F4F6"/>
+   <circle cx="0" cy="122" r="9" fill="#E9EDF0" stroke="#AEB6BC" stroke-width="2"/>
+   <g fill="#F2A33A"><circle cx="8" cy="70" r="2.4"/><circle cx="8" cy="78" r="2.4"/><circle cx="8" cy="86" r="2.4"/></g>
+  </g>`;
+}
+function arm(pts,col,w=34){
+  const d='M'+pts.map(p=>p.join(' ')).join(' L');
+  return `<path d="${d}" stroke="${col}" stroke-width="${w}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+   <circle cx="${pts[pts.length-1][0]}" cy="${pts[pts.length-1][1]}" r="17" fill="${SKIN}"/>`;
+}
+function face(cx,cy,mood,s=1){
+  const e=22*s, ey=cy+4*s, m=cy+30*s;
+  let eyes, mouth, brows='';
+  if(mood==='relax'){eyes=`<path d="M${cx-e-12} ${ey} q12 9 24 0 M${cx+e-12} ${ey} q12 9 24 0" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+    mouth=`<path d="M${cx-16} ${m-4} q16 16 32 0" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`;}
+  else if(mood==='tired'){eyes=`<path d="M${cx-e-12} ${ey+3} q12 -5 24 0 M${cx+e-12} ${ey+3} q12 -5 24 0" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+    brows=`<path d="M${cx-e-14} ${ey-16} l24 -6 M${cx+e+10} ${ey-16} l-24 -6" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`;
+    mouth=`<path d="M${cx-14} ${m+2} q14 -8 28 0" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`;}
+  else if(mood==='wow'){eyes=`<circle cx="${cx-e}" cy="${ey}" r="7" fill="${INK}"/><circle cx="${cx+e}" cy="${ey}" r="7" fill="${INK}"/>`;
+    brows=`<path d="M${cx-e-12} ${ey-20} q12 -8 24 0 M${cx+e-12} ${ey-20} q12 -8 24 0" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+    mouth=`<ellipse cx="${cx}" cy="${m}" rx="10" ry="12" fill="#7A2E2A"/>`;}
+  else {eyes=`<circle cx="${cx-e}" cy="${ey}" r="7" fill="${INK}"/><circle cx="${cx+e}" cy="${ey}" r="7" fill="${INK}"/>`;
+    mouth=`<path d="M${cx-18} ${m-4} q18 18 36 0" stroke="${INK}" stroke-width="5" fill="#7A2E2A" stroke-linecap="round"/>`;}
+  return eyes+brows+mouth+`<circle cx="${cx-e-10}" cy="${cy+22*s}" r="11" fill="#F08A86" opacity=".35"/><circle cx="${cx+e+10}" cy="${cy+22*s}" r="11" fill="#F08A86" opacity=".35"/>`;
+}
+// madre sentada. x = centro del cuerpo. pose: 'device' | 'rub' | 'lap' | 'hold'
+function mom(x,t,pose,mood,slide=0,glow=0){
+  const hx=x, hy=890, nb=`<rect x="${x-22}" y="${hy+50}" width="44" height="60" fill="${SKIN_D}"/>`;
+  let s=`<g>`;
+  // piernas
+  s+=`<rect x="${x-82}" y="1175" width="164" height="70" rx="30" fill="#55648A"/>
+      <rect x="${x-74}" y="1215" width="58" height="165" rx="22" fill="#55648A"/><rect x="${x+16}" y="1215" width="58" height="165" rx="22" fill="#55648A"/>
+      <ellipse cx="${x-48}" cy="1385" rx="40" ry="16" fill="#3B2F2B"/><ellipse cx="${x+48}" cy="1385" rx="40" ry="16" fill="#3B2F2B"/>`;
+  // pelo detrás
+  s+=`<path d="M${hx-84} ${hy+10} Q${hx-92} ${hy-86} ${hx} ${hy-90} Q${hx+92} ${hy-86} ${hx+84} ${hy+10} L${hx+80} ${hy+62} Q${hx} ${hy+40} ${hx-80} ${hy+62}Z" fill="#B9B2AC"/>`;
+  s+=nb;
+  // torso: blusa + chaqueta de punto
+  s+=`<path d="M${x-80} ${hy+92} Q${x} ${hy+70} ${x+80} ${hy+92} L${x+92} ${hy+300} Q${x} ${hy+318} ${x-92} ${hy+300}Z" fill="#F4E3D3"/>
+      <path d="M${x-80} ${hy+92} Q${x-40} ${hy+80} ${x-18} ${hy+84} L${x-6} ${hy+300} L${x-92} ${hy+300}Z M${x+80} ${hy+92} Q${x+40} ${hy+80} ${x+18} ${hy+84} L${x+6} ${hy+300} L${x+92} ${hy+300}Z" fill="#D9897A"/>`;
+  // cabeza
+  s+=`<circle cx="${hx}" cy="${hy}" r="72" fill="${SKIN}"/>
+      <path d="M${hx-78} ${hy-6} Q${hx-70} ${hy-84} ${hx+4} ${hy-82} Q${hx+80} ${hy-80} ${hx+78} ${hy-6} Q${hx+40} ${hy-56} ${hx-6} ${hy-48} Q${hx-50} ${hy-44} ${hx-78} ${hy-6}Z" fill="#C9C3BE"/>`;
+  s+=face(hx,hy,mood);
+  // brazo izquierdo en el regazo
+  s+=arm([[x-74,hy+112],[x-96,hy+220],[x-30,hy+282]],'#D9897A');
+  if(pose==='device'){
+    const dy=Math.sin(slide)*16, hxp=x+32, hyp=hy+64+dy; // cabezal contra el lado del cuello
+    s+=device(hxp,hyp,-32,0.92,glow);
+    const bx=hxp+54, by=hyp+86;
+    s+=arm([[x+74,hy+112],[x+128,hy+232],[bx,by]],'#D9897A');
+  } else if(pose==='rub'){
+    const a=t*5, rx=x+30+Math.cos(a)*6, ry=hy+74+Math.sin(a)*8;
+    s+=arm([[x+74,hy+112],[x+130,hy+200],[rx,ry]],'#D9897A');
+  } else if(pose==='hold'){ // manos hacia delante para coger la caja
+    s+=arm([[x+74,hy+112],[x+110,hy+230],[x+60,hy+272]],'#D9897A');
+  } else {
+    s+=arm([[x+74,hy+112],[x+96,hy+220],[x+30,hy+282]],'#D9897A');
+  }
+  return s+'</g>';
+}
+// hija. seated=false: de pie; walk = fase de paso
+function daughter(x,t,o){
+  const seated=o.seated, hy=seated?880:780, base=seated?1175:1100;
+  let s='<g>';
+  if(seated){
+    s+=`<rect x="${x-80}" y="1175" width="160" height="70" rx="30" fill="#3E5A88"/>
+        <rect x="${x-72}" y="1215" width="56" height="165" rx="22" fill="#3E5A88"/><rect x="${x+16}" y="1215" width="56" height="165" rx="22" fill="#3E5A88"/>
+        <ellipse cx="${x-46}" cy="1385" rx="38" ry="15" fill="#F2F2F2"/><ellipse cx="${x+46}" cy="1385" rx="38" ry="15" fill="#F2F2F2"/>`;
+  } else {
+    const w=o.walk||0, l1=Math.sin(w)*14, l2=-l1;
+    s+=`<rect x="${x-60+l1}" y="${base-10}" width="54" height="${1390-base}" rx="24" fill="#3E5A88"/>
+        <rect x="${x+6+l2}" y="${base-10}" width="54" height="${1390-base}" rx="24" fill="#3E5A88"/>
+        <ellipse cx="${x-33+l1}" cy="1394" rx="36" ry="14" fill="#F2F2F2"/><ellipse cx="${x+33+l2}" cy="1394" rx="36" ry="14" fill="#F2F2F2"/>`;
+  }
+  // melena larga detrás
+  s+=`<path d="M${x-76} ${hy} Q${x-86} ${hy-88} ${x} ${hy-88} Q${x+86} ${hy-88} ${x+76} ${hy} L${x+84} ${hy+170} Q${x} ${hy+190} ${x-84} ${hy+170}Z" fill="#5A3A2E"/>`;
+  s+=`<rect x="${x-20}" y="${hy+46}" width="40" height="60" fill="${SKIN_D}"/>`;
+  const top=hy+84, bot=seated?1200:base+10;
+  s+=`<path d="M${x-76} ${top+8} Q${x} ${top-14} ${x+76} ${top+8} L${x+86} ${bot} Q${x} ${bot+16} ${x-86} ${bot}Z" fill="#E3A93B"/>
+      <path d="M${x-30} ${top} Q${x} ${top+22} ${x+30} ${top}" stroke="#C98F25" stroke-width="8" fill="none"/>`;
+  s+=`<circle cx="${x}" cy="${hy}" r="66" fill="${SKIN}"/>
+      <path d="M${x-72} ${hy+4} Q${x-70} ${hy-80} ${x+6} ${hy-76} Q${x+76} ${hy-74} ${x+72} ${hy+4} Q${x+50} ${hy-40} ${x+10} ${hy-46} Q${x-30} ${hy-30} ${x-72} ${hy+4}Z" fill="#6B4536"/>`;
+  s+=face(x,hy,o.mood||'smile',.92);
+  const sh=top+18;
+  if(o.box){ // lleva la caja con las dos manos
+    const bx=o.boxX, by=o.boxY;
+    s+=gift(bx,by,1,0);
+    s+=arm([[x-66,sh],[x-80,sh+110],[bx-58,by+10]],'#E3A93B')+arm([[x+66,sh],[x+80,sh+110],[bx+58,by+10]],'#E3A93B');
+  } else if(o.device){
+    const dy=Math.sin(o.slide)*16, hxp=x-30, hyp=hy+62+dy;
+    s+=device(hxp,hyp,32,0.88,o.glow);
+    s+=arm([[x+66,sh],[x+84,sh+110],[x+40,sh+170]],'#E3A93B');
+    s+=arm([[x-66,sh],[x-120,sh+130],[hxp-52,hyp+84]],'#E3A93B');
+  } else {
+    s+=arm([[x-66,sh],[x-84,sh+120],[x-62,sh+200]],'#E3A93B')+arm([[x+66,sh],[x+84,sh+120],[x+62,sh+200]],'#E3A93B');
+  }
+  return s+'</g>';
+}
+function gift(x,y,s,open){ // open 0-1: la tapa sube y gira
+  const lid=`<g transform="translate(${x} ${y-56-open*120}) rotate(${open*-28})">
+     <rect x="-74" y="-18" width="148" height="34" rx="6" fill="#B8352F"/><rect x="-12" y="-18" width="24" height="34" fill="#F2C14E"/>
+     <path d="M0 -18 C-50 -70 -70 -20 0 -18 C70 -20 50 -70 0 -18Z" fill="#F2C14E" stroke="#D9A632" stroke-width="3"/></g>`;
+  return `<g transform="scale(1)"><rect x="${x-66}" y="${y-50}" width="132" height="106" rx="8" fill="#C8433B"/>
+     <rect x="${x-12}" y="${y-50}" width="24" height="106" fill="#F2C14E"/></g>`+lid;
+}
+function sparkles(cx,cy,k,t){
+  let s='';
+  for(let i=0;i<10;i++){const a=i*0.63+t*2, r=60+k*110+(i%3)*18, x=cx+Math.cos(a)*r, y=cy+Math.sin(a)*r*0.8;
+    const sz=6+(i%3)*4; s+=`<path d="M${x} ${y-sz} L${x+sz*.3} ${y-sz*.3} L${x+sz} ${y} L${x+sz*.3} ${y+sz*.3} L${x} ${y+sz} L${x-sz*.3} ${y+sz*.3} L${x-sz} ${y} L${x-sz*.3} ${y-sz*.3}Z" fill="#F2C14E" opacity="${clamp(1-k*.8)}"/>`;}
+  return s;
+}
+function room(t){
+  let s=`<defs>
+   <linearGradient id="sil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FDFDFD"/><stop offset=".5" stop-color="#C9D0D6"/><stop offset="1" stop-color="#8E979E"/></linearGradient>
+   <radialGradient id="gl"><stop offset="0" stop-color="#FF7FC4" stop-opacity=".75"/><stop offset="1" stop-color="#FF7FC4" stop-opacity="0"/></radialGradient>
+   <radialGradient id="lamp"><stop offset="0" stop-color="#FFE7B0" stop-opacity=".55"/><stop offset="1" stop-color="#FFE7B0" stop-opacity="0"/></radialGradient></defs>
+   <rect width="1080" height="1920" fill="#F7EFE6"/><rect y="1395" width="1080" height="525" fill="#E6D2BC"/>
+   <rect x="0" y="1395" width="1080" height="10" fill="#D6BFA6"/>
+   <ellipse cx="540" cy="1470" rx="460" ry="60" fill="#D9C3AA"/>`;
+  // ventana de noche con nieve
+  s+=`<rect x="70" y="700" width="250" height="300" rx="10" fill="#2B3A67"/>`;
+  for(let i=0;i<14;i++){const sx=80+((i*53)%230), sy=710+((i*97+t*60*(1+i%3)))%285; s+=`<circle cx="${sx}" cy="${sy}" r="${3+i%3}" fill="#fff" opacity=".85"/>`;}
+  s+=`<rect x="70" y="700" width="250" height="300" rx="10" fill="none" stroke="#FFFFFF" stroke-width="14"/><rect x="189" y="700" width="12" height="300" fill="#fff"/><rect x="70" y="844" width="250" height="12" fill="#fff"/>`;
+  // árbol de Navidad
+  s+=`<rect x="938" y="1320" width="30" height="70" fill="#7A5236"/>
+      <path d="M953 930 L1050 1120 L856 1120Z M953 1010 L1070 1230 L836 1230Z M953 1100 L1080 1340 L826 1340Z" fill="#3F7D5C"/>
+      <path d="M953 905 l9 20 22 2 -17 14 6 22 -20 -12 -20 12 6 -22 -17 -14 22 -2Z" fill="#F2C14E"/>`;
+  const L=[[900,1080],[995,1100],[930,1180],[1020,1210],[880,1260],[975,1290],[1040,1320],[905,1320]];
+  L.forEach((p,i)=>{const on=(Math.floor(t*3)+i)%2; s+=`<circle cx="${p[0]}" cy="${p[1]}" r="9" fill="${['#FF6B6B','#F2C14E','#7FD3FF'][i%3]}" opacity="${on?1:.35}"/>`;});
+  // lámpara
+  s+=`<circle cx="760" cy="760" r="170" fill="url(#lamp)"/><rect x="752" y="770" width="16" height="625" fill="#8C7A6B"/><path d="M700 760 L820 760 L795 680 L725 680Z" fill="#F4D9A8"/>`;
+  // sofá
+  s+=`<rect x="130" y="1010" width="780" height="210" rx="60" fill="#7FA99B"/>
+      <rect x="110" y="1180" width="820" height="130" rx="40" fill="#8DB8A8"/>
+      <rect x="80" y="1080" width="110" height="250" rx="45" fill="#749E90"/><rect x="850" y="1080" width="110" height="250" rx="45" fill="#749E90"/>
+      <rect x="160" y="1310" width="24" height="70" fill="#5E463A"/><rect x="856" y="1310" width="24" height="70" fill="#5E463A"/>
+      <rect x="150" y="1090" width="120" height="100" rx="30" fill="#F2C14E" transform="rotate(-10 210 1140)"/>`;
+  return s;
+}
+function bubble(x,y,text,k,dir=1){
+  if(k<=0||!text) return '';
+  const w=Math.max(260,text.length*26+60), sc=back(k);
+  return `<g transform="translate(${x} ${y}) scale(${sc})"><rect x="${-w/2}" y="-58" width="${w}" height="100" rx="40" fill="#fff" stroke="${INK}" stroke-width="5"/>
+    <path d="M${dir*30} 40 L${dir*70} 86 L${dir*72} 40Z" fill="#fff" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/><rect x="${dir*26}" y="34" width="${dir>0?52:-52}" height="10" fill="#fff" transform="${dir<0?'translate(52 0)':''}"/>
+    <text x="0" y="6" text-anchor="middle" font-family="I" font-weight="700" font-size="40" fill="${INK}">${text}</text></g>`;
+}
+// --- textos por variante ---------------------------------------------------
+const L1='Masajeador de cuello GlowPulse', L2='Sirve para darte un masaje en el cuello en casa, en el sofá o en la cama, sin cables';
+const V={
+ regalo:{s2:'Mi madre: siempre pendiente de todos menos de ella', s3:'Así que este año: uno para ella y otro para mí', b:['','']},
+ nomecompres:{s2:'Mi madre todos los años:', s3:'Uno para ella. Otro para mí.', b:['¡No me compres nada!','Vale, mamá…']},
+ pov:{s2:'POV: le regalas esto a tu madre…', s3:'…y ya no hay quien la levante del sofá', b:['','']},
+ precio:{s2:'Buscando regalo para mi madre…', s3:'2 por 79,95 € = 39,98 € cada una', b:['','']},
+ resuelto:{s2:'Regalo de Navidad para mi madre:', s3:'Resuelto. Y de paso, uno para mí.', b:['','']},
+ nuncasecompra:{s2:'Lo que mi madre nunca se compraría…', s3:'…por eso se lo regalo yo', b:['¡No hacía falta!','']},
+ none:{s2:'',s3:'',b:['','']}
+};
+function caption(t,v){
+  const box=(a,b,html,top)=>{if(t<a||t>b)return '';const o=clamp(Math.min(a<=0?1:(t-a)/.25,(b-t)/.25));
+    return `<div class="c" style="top:${top}px;opacity:${o};transform:translateY(${(1-o)*20}px)">${html}</div>`;};
+  if(v==='none') return '';
+  const X=V[v];
+  return box(0,3.4,`<div style="font-weight:800;font-size:70px"><span>${L1}</span></div><div style="font-weight:500;font-size:40px;margin-top:22px"><span>${L2}</span></div>`,280)
+   +box(3.4,7.4,`<div style="font-weight:800;font-size:60px"><span>${X.s2}</span></div>`,330)
+   +box(7.4,11.2,`<div style="font-weight:800;font-size:60px"><span>${X.s3}</span></div>`,330)
+   +box(8.6,11.2,`<div style="font-weight:500;font-size:40px"><span>Lo coges con una mano y lo deslizas por el cuello</span></div>`,1560);
+}
+// --- tarjeta final con el producto real ------------------------------------
+function endcard(t,k){
+  const f=1+Math.floor(((t-11.2)*24*0.66))%60, pad=String(f).padStart(2,'0');
+  const sl=(a)=>clamp((t-11.2-a)/.35);
+  return `<g opacity="${k}"><rect width="1080" height="1920" fill="#A8DDD0"/>
+   <image href="../../../tema/media/gp360-frames/gp360-f${pad}.webp" x="0" y="${(1-back(sl(0)))*160}" width="1080" height="1920" preserveAspectRatio="xMidYMid slice"/></g>`;
+}
+function endtext(t){
+  if(t<11.2) return '';
+  const o=a=>clamp((t-11.2-a)/.3);
+  const sp=(a,html,top,extra='')=>`<div class="c" style="top:${top}px;opacity:${o(a)};transform:translateY(${(1-o(a))*24}px);${extra}">${html}</div>`;
+  return sp(.1,`<div style="font-weight:800;font-size:104px"><span>2 por 79,95 €</span></div>`,250)
+   +sp(.35,`<div style="font-weight:700;font-size:50px"><span>Uno para ti y otro para tu madre</span></div>`,420)
+   +sp(.6,`<div style="font-weight:500;font-size:40px"><span>Envío gratis · 14 días para devolverlo</span></div>`,1430)
+   +sp(.85,`<div style="font-weight:800;font-size:52px;"><span style="background:#2A2321;color:#fff;padding:14px 34px">glowpulse.store</span></div>`,1520);
+}
+const CAM=[[0,1.5,400,1010],[3.2,1.5,400,1010],[3.7,1.12,560,1060],[7.3,1.12,560,1060],[7.6,1.4,450,1020],[8.6,1.4,450,1020],[8.7,1.32,540,1030],[11.2,1.32,540,1030]];
+function cam(t){let i=0;while(i<CAM.length-2&&t>CAM[i+1][0])i++;const a=CAM[i],b=CAM[i+1],k=ease((t-a[0])/(b[0]-a[0]||1));
+  const z=lerp(a[1],b[1],k),cx=lerp(a[2],b[2],k),cy=lerp(a[3],b[3],k);return `translate(${540-z*cx} ${1060-z*cy}) scale(${z})`;}
+window.render=function(t,v){
+  let s='<g transform="'+cam(t)+'">'+room(t);
+  const B=V[v].b;
+  if(t<3.4){ // 1 · la madre ya lo usa: cómo se pone en los 3 primeros segundos
+    s+=mom(380,t,'device','relax',t*2.4,.6+.4*Math.sin(t*6));
+    s+=daughter(690,t,{seated:true,mood:'smile'});
+  } else if(t<7.4){ // 2 · llega la hija con el regalo
+    const enter=seg(t,3.5,5.0), dx=lerp(1250,700,enter), walking=t<5.0;
+    const give=seg(t,5.5,6.4);
+    const mood=t<5.6?'tired':'wow';
+    s+=mom(380,t,t<5.6?'rub':'hold',mood);
+    if(give<1){
+      s+=daughter(dx,t,{seated:false,walk:walking?t*9:0,box:true,boxX:lerp(dx-10,dx-120,give),boxY:lerp(1010,1080,give),mood:'smile'});
+    } else {
+      s+=daughter(dx,t,{seated:false,mood:'smile'})+gift(470,1120,1,0);
+    }
+    s+=bubble(320,690,B[0],seg(t,4.3,4.6),1)+bubble(800,600,B[1],seg(t,5.1,5.4),-1);
+  } else if(t<11.2){ // 3 · lo abre y acaban las dos con el suyo
+    if(t<8.7){
+      const op=seg(t,7.5,8.0), rise=seg(t,7.9,8.5);
+      s+=mom(380,t,'hold','wow')+daughter(700,t,{seated:false,mood:'smile'});
+      s+=gift(470,1120,1,op);
+      if(rise>0) s+=device(470,1100-rise*230,0,1.1*rise+0.01,rise)+sparkles(470,960,rise,t);
+    } else {
+      s+=mom(380,t,'device','relax',(t-8.7)*2.6,.6+.4*Math.sin(t*6));
+      s+=daughter(690,t,{seated:true,device:true,slide:(t-8.7)*2.6+1.2,glow:.6+.4*Math.cos(t*6),mood:'relax'});
+    }
+    const fade=clamp((t-8.55)/.15); if(t>8.4&&t<8.9) s+=`<rect width="1080" height="1920" fill="#fff" opacity="${1-Math.abs(t-8.7)/.2}"/>`;
+  }
+  s+='</g>';
+  if(t>=10.9) s+=endcard(t,clamp((t-10.9)/.3));
+  document.getElementById('svg').innerHTML=s;
+  document.getElementById('txt').innerHTML=(t<11.2?caption(t,v):'')+endtext(t);
+};
+</script></body></html>
