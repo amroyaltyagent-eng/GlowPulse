@@ -18,6 +18,7 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 
 - **Forma de trabajo (Antonio, 28-10):** el CEO piensa y revisa; **Codex vía OmniRoute ejecuta** (vídeos, código, fichas, informes). Codex solo está en el PC; en la nube no hay Codex.
 - **Antonio aprueba TODA creatividad antes de publicarla** (vídeos e imágenes, en anuncios y orgánico). Nada se sube sin su OK.
+- **Más visitas a la web (Antonio, 28-10):** todo anuncio lleva a la tienda con el enlace (glowpulse.store en el texto, el titular y display_link). En orgánico: «enlace en la bio» y glowpulse.store en el texto.
 - **Letra (Antonio, 28-10): Poppins** (marca/fuentes/: ExtraBold títulos, Bold, Medium textos). Nunca Inter.
 - **Sin precio en las creatividades (Antonio, 28-10):** ni en la imagen/vídeo ni en el texto del anuncio. En su lugar «Mira el precio y la oferta en glowpulse.store» + el enlace de la tienda abajo, para que entren a la web y dejen el email (pop-up). Modelo: marketing/videos/animado-3d/PRUEBA-portada-sinprecio-poppins.jpg. Sustituye a la regla de poner 79,95 € en todo.
 - **Runway:** Antonio prefiere gastar en un vídeo 3D bueno (OK 28-10). La compra de créditos se hace en runway.com (la hace Antonio).
@@ -92,3 +93,4 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 | 28-10 tarde | Antonio: no le gusta la imagen 4:5 ni la letra → **H4_3d_madrehija_img (52561672486099) EN PAUSA**. En D_HIJAS solo queda activo H3_marmol_paratumadre | — | Hecho |
 | 28-10 tarde | Encargo de nuevos productos para la marca (lista corta y criterios) | marketing/investigacion/NUEVOS-PRODUCTOS-2026-10-28.md | En cola para Investigación (PC) |
 | 28-10 tarde | Antonio elige letra **Poppins** y **sin precio** en anuncios (que entren a la web). H3 (con precio) EN PAUSA → **H3b_marmol_paratumadre_sinprecio** (52561672941899, creative 1453171466758174) activo en D_HIJAS. Pendiente: pasar a «sin precio» los anuncios de A y C (V1, D1b, C4b llevan 59,95 €/79,95 € en el texto) en la revisión del 30-10 | marca/fuentes/ | Hecho / pendiente 30-10 |
+| 28-10 tarde | Antonio quiere más visitas a la web. **D_HIJAS (52561668300099) EN PAUSA** (Meta no deja cambiar el objetivo) → **D2_HIJAS_VISITAS_WEB_ES** (52561673152499, 4 €/día, optimiza **visitas a la página de destino**, mismo público) con H3c_marmol_paratumadre_sinprecio_link (52561673950699, creative 1104837155749846, glowpulse.store en texto y titular, utm_campaign=hijas_visitas). Meta 12 €/día: A 5 + C 3 + D2 4 | — | Activo, en revisión |
