@@ -24,10 +24,11 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 7. Pop-up BIENVENIDA10 + Shopify Email (bienvenida, carrito abandonado, 48 h).
 8. CJ: ticket en la web pidiendo envío UE por país si Kelly no contesta.
 
-## LO PRIMERO en la próxima sesión
-1. Antonio publica el **tema v14** (208023781710): vista previa glowpulse.store/products/masajeador-cuello?preview_theme_id=208023781710. Lleva la portada 360 que gira en móvil y el pop-up de emails. El v13 publicado depende del enlace de Runway que caduca el 29-10 ~08:00.
-2. Al publicarlo: probar en el iPhone que gira con el scroll y que el pop-up sale a los 15 s y da el código.
-3. Black Friday: plan en marketing/PUBLICOS-Y-BLACK-FRIDAY-2026.md. El 18-11 crear descuentos y anuncios BF (recordatorio programado).
+## LO PRIMERO en la próxima sesión (tras /clear del 28-10)
+1. Leer ESTADO-2026-10-28.md: estrategia nueva para la primera venta y encargos.
+2. **Vídeo animado de una hija que le regala el masajeador a su madre** (pedido por Antonio; animado, no personas realistas con IA; aparato en T).
+3. Contenido: guiones de persona y animados según lo que diga Investigación (no solo vídeos del producto). Mucho orgánico.
+4. 30-10: revisar los 3 públicos y mover dinero; retargeting cuando Antonio acepte las condiciones de públicos de Meta.
 
 ## Registro (lo más nuevo abajo)
 | Fecha | Qué | IDs / archivo | Resultado |
@@ -70,3 +71,5 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 | 28-10 | Antonio denegó la consulta de estadísticas del píxel (ads_get_dataset_stats): no repetirla sin pedirlo | — | Anotado |
 | 28-10 | Antonio: «los anuncios siguen sin gustarme y salen vídeos a 1 fps». No había anuncios de vídeo activos → causa probable: Meta animaba las imágenes en Reels (mejoras Advantage+). **Nuevos creativos con todas las mejoras desactivadas**: V1_360_reel_24fps (creative 1464174379148498, vídeo 1669660991344473 a 24 fps reales), D1b_marmol (1102360822714942), C4b_paraquesirve (1113909051501183). 9 anuncios nuevos activos (A 52561664908899/922099/930699 · B 52561664950499/959299/973499 · C 52561664977099/986299/52561665001699). Los 6 viejos (C4 y D1) en pausa | marketing/videos/hacer_video_360.py | Hecho, en revisión de Meta |
 | 28-10 | Orgánico: Metricool sin redes conectadas (marca 7055270). 3 reels 24 fps (R1 producto, R2 regalo, R3 rutina) en Shopify Files con textos y calendario | contenido/ORGANICO-REELS-360.md | Antonio publica a mano o conecta Metricool |
+
+| 28-10 | Antonio: el orgánico del 27-10 se publicó por otra vía (no Metricool, sin espacio). Pide: primera venta, cambiar estrategia, vídeos animados (no personas IA) y con guion de persona, mucho orgánico, usar a los agentes. Estrategia nueva y encargos en ESTADO-2026-10-28.md. Encargo al director enviado (entregado; PC desconectado) | ESTADO-2026-10-28.md | En cola para el PC |
