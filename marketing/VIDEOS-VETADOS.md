@@ -20,3 +20,7 @@ Todos los anuncios que los usan están en PAUSA (27-10). Conjunto A_RITUAL (5256
 - Mínimo 24 fps reales, 1080×1920 (9:16), 15 s. Nada de pases de fotos fijas ni clips de 5 s alargados.
 - Antes de subirlo a Meta: mirarlo entero en el móvil. Si da saltos, no se sube.
 - Mientras no haya vídeos que pasen esta prueba, los anuncios van con imagen (C1_regalo79_img y C3_paraquesirve_img).
+
+## Vídeos aprobados (28-10)
+- V1/R1 GP360_reel_15s (Meta video 1669660991344473), R2 regalo y R3 rutina: 1080×1920, 24 fps, 360 fotogramas distintos (comprobado con mpdecimate). Detalle en contenido/ORGANICO-REELS-360.md.
+- Los anuncios nuevos llevan **desactivadas las mejoras automáticas de Meta** (animación de imagen, recorte, etc.): eran la causa probable de que las imágenes se vieran «a saltos» en Reels.
