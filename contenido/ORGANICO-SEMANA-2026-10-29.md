@@ -1,5 +1,7 @@
 # Orgánico · semana 29-10 → 4-11 · 2 piezas al día en TikTok + IG Reels + FB Reels
 
+> **28-10 tarde: Antonio NO quiere el dibujo plano (A1-A6, C1).** No publicarlos. Se rehacen en 3D tipo película en cuanto haya créditos de Runway. Mientras: R1-R3 (360) y la imagen 3D marketing/videos/animado-3d/GP_hijas_3d_4x5.jpg. Textos y guiones de persona siguen valiendo.
+
 Ángulo de la semana: **regalo hija → madre** (Navidad / Black Friday) + **pack 2 por 79,95 € = 39,98 € cada uno**.
 Todo es **animación 2D hecha por código** (sin personas realistas de IA) o la vuelta 360. 24 fps reales, revisado fotograma a fotograma.
 Generador: marketing/videos/animado-hija-madre/ (escena.html + render.js, variantes en `V`).

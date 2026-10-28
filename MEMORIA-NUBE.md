@@ -14,6 +14,8 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 - Meta: S2 (52560795965699) EN PAUSA. Activa GP_VENTAS_ATC_PODER_NOV26 (52561453789899), 12 €/día, solo anuncios de imagen.
 - Runway: tope 3 €/día. Un vídeo de 15 s cuesta unos 450 créditos (≈ 4,50 $): pendiente de que Antonio apruebe comprar créditos.
 
+- **Estilo de animación (Antonio, 28-10):** personajes **3D tipo película de animación** (como marketing/videos/animado-3d/K1_madre_hija_sofa_3d.png). El dibujo plano 2D NO le gusta: no usarlo en anuncios ni en orgánico.
+
 - **GlowPulse HQ es secundario** (orden de Antonio, 28-10): no dedicarle tiempo. La información va a claude-mem (PC) y, en la nube, a este repo (MEMORIA-NUBE.md y ESTADO del día).
 
 ## Pendiente solo PC (en orden)
@@ -79,3 +81,5 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 | 28-10 tarde | Orgánico: calendario 29-10 → 4-11, 2 piezas/día, textos y 5 guiones de persona para grabar con el aparato real | contenido/ORGANICO-SEMANA-2026-10-29.md | Antonio/PC publica a mano (Metricool sigue sin redes) |
 | 28-10 tarde | **Conjunto nuevo D_HIJAS_PACK_MADRE_ES** (52561668300099, 4 €/día, mujeres 25-45 como sugerencia A+A, España, móvil FB+IG con Reels, optimiza AddToCart). Anuncios H1_anim_nomecompres_hijas (52561671607699, creative 1057659887316812, vídeo 2574599199704359, etiqueta IA sí por la tarjeta 360) y H2_img_unoparati_otroparatumadre (52561671611499, creative 1125339433803132, imagen 341d52ef…, sin IA). Mejoras Advantage+ desactivadas. UTM utm_campaign=hijas_pack | — | Activos, en revisión de Meta |
 | 28-10 tarde | **B_ES_iOS (52561457976099) EN PAUSA** (CTR 1 %, el peor); sus 4 €/día pasan a D_HIJAS. Meta sigue en 12 €/día: A 5 + C 3 + D 4 | — | Hecho. Presupuesto total sin cambios |
+| 28-10 tarde | Antonio: no le gusta el dibujo plano; quiere personajes 3D tipo película. **H1 y H2 (2D) en pausa.** Imagen 3D de prueba en Runway (tarea 36464bdf, aparato en T bien, revisada) → anuncio **H4_3d_madrehija_img** (52561672486099, creative 2159567827974379, imagen 74c7e68a…, etiqueta IA). Mientras, **H3_marmol_paratumadre** (52561671863699, foto mármol D1 con texto de hijas). Ambos en D_HIJAS | marketing/videos/animado-3d/ | En revisión de Meta. Runway: quedan 35 créditos |
+| 28-10 tarde | Vídeo 3D hija → madre: necesita ≈ 500 créditos de Runway (3 escenas de 5 s + 2 imágenes) → **pedido OK a Antonio para comprar 1.000 créditos (10 $)** | — | Esperando OK |
