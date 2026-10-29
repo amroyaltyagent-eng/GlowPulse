@@ -102,3 +102,7 @@ Desde el 27-10, por orden de Antonio, el CEO en la nube (session_01EbWMMsbKMf7fn
 | 29-10 | Antonio publicó **v17** (208187556174, verificado como MAIN) | — | Hecho |
 | 29-10 | Conjunto **E_RETARGETING_VISITANTES_ES** (52561909434099, 3 €/día, solo públicos RT, móvil FB+IG, optimiza AddToCart) con anuncio E_H3c_marmol_paratumadre_RT (52561909612499, creative H3c 1104837155749846 ya aprobado). **A_ZONAS_ALTAS 5 → 2 €/día** (0,37 €/clic, el más caro). Meta sigue en 12 €/día: A 2 + C 3 + D2 4 + E 3 | — | Activo, en revisión de Meta |
 | 29-10 | Plan hasta el sábado para la primera venta + encargo al director | PLAN-PRIMERA-VENTA-SABADO.md · mensaje a session_01GTWR1yYgsbgTCdmjHQ7aLh | Entregado; el PC lo ejecuta el 30-10 |
+| 29-10 | **Antonio: «haz tú todo», aún no tiene el producto y la 1.ª venta tiene que ser de un desconocido** (nada de amigos/familia, nada de vídeo real) | — | Regla vigente |
+| 29-10 | Galería de la ficha: ilustración 3D K1 (madre e hija usándolo en el cuello) en 2.ª posición | MediaImage 74954359177550 | Hecho, READY |
+| 29-10 | A y C sin precio: anuncios H3c nuevos A 52561910684699 y C 52561910713899 (activos, en revisión). En pausa los 6 con precio: 52561664908899/922099/930699 y 52561664977099/986299/52561665001699 | creative 1104837155749846 | Hecho |
+| 29-10 | Pago y envío comprobados por API: ES gratis/4,95 € (8-15 días), Baleares, UE; Shopify Pay, Apple Pay, Google Pay | — | OK. Prueba en navegador real → PC (la nube no puede abrir la tienda) |
