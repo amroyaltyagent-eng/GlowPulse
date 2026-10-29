@@ -14,7 +14,7 @@
         "floor": "#9FD3C5",
         "size": 58,
         "lift": 12,
-        "scroll_vh": 260
+        "scroll_vh": 180
       }
     },
     "main": {
@@ -56,5 +56,5 @@
     },
     "gp_story": {"type": "gp4-home", "settings": {"layout": "product"}}
   },
-  "order": ["gp360", "main", "gp_story"]
+  "order": ["main", "gp360", "gp_story"]
 }
